@@ -19,15 +19,21 @@ export default function BillingPage() {
       <div className="grid md:grid-cols-2 gap-6 mb-6">
         <div className="bg-white shadow rounded-lg p-6">
           <h3 className="text-lg font-semibold mb-4">Standard Plan</h3>
-          <p className="text-3xl font-bold mb-2">$9/month</p>
+          <div className="mb-4">
+            <p className="text-3xl font-bold">$12/month</p>
+            <p className="text-sm text-gray-500">or $101/year (save $43)</p>
+          </div>
           <ul className="space-y-2 text-gray-600 mb-4">
             <li>✓ All templates</li>
             <li>✓ Vimeo integration</li>
             <li>✓ Unlimited media</li>
             <li>✓ Resume import</li>
           </ul>
-          <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            Select Standard
+          <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mb-2">
+            Select Monthly
+          </button>
+          <button className="w-full px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50">
+            Select Yearly
           </button>
         </div>
 
@@ -38,7 +44,10 @@ export default function BillingPage() {
             </span>
           </div>
           <h3 className="text-lg font-semibold mb-4 mt-2">Premium Plan</h3>
-          <p className="text-3xl font-bold mb-2">$19/month</p>
+          <div className="mb-4">
+            <p className="text-3xl font-bold">$20/month</p>
+            <p className="text-sm text-gray-500">or $199/year (save $41)</p>
+          </div>
           <ul className="space-y-2 text-gray-600 mb-4">
             <li>✓ Everything in Standard</li>
             <li>✓ Audition tracker</li>
@@ -46,8 +55,11 @@ export default function BillingPage() {
             <li>✓ Priority support</li>
             <li>✓ Advanced analytics</li>
           </ul>
-          <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
-            Select Premium
+          <button className="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 mb-2">
+            Select Monthly
+          </button>
+          <button className="w-full px-4 py-2 border border-blue-600 text-blue-600 rounded-lg hover:bg-blue-50">
+            Select Yearly
           </button>
         </div>
       </div>

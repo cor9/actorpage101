@@ -27,13 +27,13 @@ A SaaS platform that lets actors (and parents of young actors) quickly create pr
    - Limited media storage
    - `yourname.actorpage101.site` subdomain
 
-2. **Standard** ($9/mo)
+2. **Standard** ($12/mo or $101/year)
    - All templates
    - Vimeo integration
    - Unlimited media
    - Resume import (if Resume101 enabled)
 
-3. **Premium** ($19/mo)
+3. **Premium** ($20/mo or $199/year)
    - Everything in Standard
    - Audition tracker (if enabled)
    - Resume101 integration (if enabled)
@@ -161,8 +161,8 @@ Copy the contents and paste into Supabase SQL Editor, then execute.
 ### 4. Set Up Stripe
 
 1. Create products and prices in Stripe Dashboard:
-   - Standard Plan: $9/month
-   - Premium Plan: $19/month
+   - Standard Plan: $12/month or $101/year
+   - Premium Plan: $20/month or $199/year
 
 2. Copy the price IDs to your `.env.local`
 
@@ -252,8 +252,8 @@ if (hasFeatureAccess(profile, 'audition_tracker')) {
 
 Subscription tiers are managed through Stripe and synced to `profiles.subscription_tier`:
 - `free`: Default tier
-- `standard`: $9/mo
-- `premium`: $19/mo
+- `standard`: $12/mo or $101/year
+- `premium`: $20/mo or $199/year
 
 ### Actor Sites
 

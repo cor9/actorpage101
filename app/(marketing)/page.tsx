@@ -92,7 +92,10 @@ export default function MarketingPage() {
                 Popular
               </div>
               <h3 className="text-2xl font-bold mb-2">Standard</h3>
-              <p className="text-3xl font-bold mb-4">$9/mo</p>
+              <div className="mb-4">
+                <p className="text-3xl font-bold">$12/mo</p>
+                <p className="text-sm text-gray-500">or $101/year</p>
+              </div>
               <ul className="space-y-2 text-gray-600">
                 <li>✓ All templates</li>
                 <li>✓ Vimeo integration</li>
@@ -102,7 +105,10 @@ export default function MarketingPage() {
             </div>
             <div className="border rounded-lg p-6">
               <h3 className="text-2xl font-bold mb-2">Premium</h3>
-              <p className="text-3xl font-bold mb-4">$19/mo</p>
+              <div className="mb-4">
+                <p className="text-3xl font-bold">$20/mo</p>
+                <p className="text-sm text-gray-500">or $199/year</p>
+              </div>
               <ul className="space-y-2 text-gray-600">
                 <li>✓ Everything in Standard</li>
                 <li>✓ Audition tracker</li>
