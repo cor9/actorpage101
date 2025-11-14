@@ -29,7 +29,7 @@ export default async function ActorSitePage({ params }: PageProps) {
         <div className="max-w-4xl mx-auto px-4">
           <h2 className="text-3xl font-bold mb-6">About</h2>
           <p className="text-lg text-gray-700 leading-relaxed">
-            This is a placeholder actor site. When published, this page will display the actor's
+            This is a placeholder actor site. When published, this page will display the actor&apos;s
             full bio, headshots, reels, and credits based on their chosen template and settings.
           </p>
           <div className="mt-6 grid grid-cols-2 gap-4 text-sm">
