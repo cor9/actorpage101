@@ -83,7 +83,7 @@ export default function SignupPage() {
               </div>
               <div className="relative flex justify-center text-sm">
                 <span className="px-2 bg-white text-gray-500">
-                  After signup, you'll complete the setup wizard
+                  After signup, you&apos;ll complete the setup wizard
                 </span>
               </div>
             </div>
