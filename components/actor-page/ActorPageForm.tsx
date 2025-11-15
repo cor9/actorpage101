@@ -12,6 +12,7 @@ import {
   FontPreset,
   IconStyle,
 } from './types';
+import { ImageUpload } from '../ImageUpload';
 
 type Props = {
   initialConfig: ActorPageConfig;
@@ -559,13 +560,13 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               onChange={(e) => updateHero('name', e.target.value)}
               className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-sm"
             />
-            <label className="block mt-3 text-xs text-slate-300">Headshot URL</label>
-            <input
-              type="text"
-              value={config.hero.headshotUrl}
-              onChange={(e) => updateHero('headshotUrl', e.target.value)}
-              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-sm"
-            />
+            <div className="mt-3">
+              <ImageUpload
+                label="Hero Headshot"
+                currentUrl={config.hero.headshotUrl}
+                onUploadComplete={(url) => updateHero('headshotUrl', url)}
+              />
+            </div>
             <label className="block mt-3 text-xs text-slate-300">
               Location (Local Hire)
             </label>
@@ -723,16 +724,14 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
           {config.headshots.galleries[0]?.images.map((img, index) => (
             <div
               key={img.id}
-              className="flex flex-col gap-2 rounded-xl bg-deep-purple/80 border border-neon-cyan/30 p-3 md:flex-row md:items-center"
+              className="flex flex-col gap-3 rounded-xl bg-deep-purple/80 border border-neon-cyan/30 p-4"
             >
-              <input
-                type="text"
-                value={img.url}
-                onChange={(e) =>
-                  handleHeadshotChange(index, 'url', e.target.value)
+              <ImageUpload
+                label={`Headshot ${index + 1}`}
+                currentUrl={img.url}
+                onUploadComplete={(url) =>
+                  handleHeadshotChange(index, 'url', url)
                 }
-                className="flex-1 rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
-                placeholder="Image URL"
               />
               <input
                 type="text"
@@ -740,13 +739,13 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                 onChange={(e) =>
                   handleHeadshotChange(index, 'alt', e.target.value)
                 }
-                className="flex-1 rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
+                className="w-full rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
                 placeholder="Alt text (optional)"
               />
               <button
                 type="button"
                 onClick={() => handleRemoveHeadshot(index)}
-                className="text-[11px] text-red-400 hover:text-red-300 mt-1 md:mt-0"
+                className="self-end text-[11px] text-neon-orange hover:text-red-400 transition-colors"
               >
                 Remove
               </button>
