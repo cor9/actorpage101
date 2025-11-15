@@ -100,8 +100,8 @@ export default function MarketingPage() {
               <h3 className="text-2xl font-bold mb-2 text-white">Free</h3>
               <p className="text-3xl font-bold mb-4 text-gray-300">$0</p>
               <ul className="space-y-2 text-gray-400">
+                <li>✓ 2 headshots, 1 reel</li>
                 <li>✓ Basic site template</li>
-                <li>✓ Limited media storage</li>
                 <li>✓ yourname.actorpage101.site</li>
               </ul>
             </div>
@@ -115,10 +115,10 @@ export default function MarketingPage() {
                 <p className="text-sm text-gray-400">or $101/year</p>
               </div>
               <ul className="space-y-2 text-gray-300">
+                <li>✓ 5 headshots, 4 reels</li>
                 <li>✓ All templates</li>
                 <li>✓ Vimeo integration</li>
-                <li>✓ Unlimited media</li>
-                <li>✓ Resume import</li>
+                <li>✓ PDF resume embed</li>
               </ul>
             </div>
             <div className="border border-gray-600 rounded-lg p-6 bg-deep-purple/50">
@@ -128,9 +128,9 @@ export default function MarketingPage() {
                 <p className="text-sm text-gray-400">or $199/year</p>
               </div>
               <ul className="space-y-2 text-gray-300">
-                <li>✓ Everything in Standard</li>
-                <li>✓ Audition tracker</li>
-                <li>✓ Resume101 integration</li>
+                <li>✓ 10 headshots, unlimited reels</li>
+                <li>✓ Structured resume builder</li>
+                <li>✓ Projects showcase</li>
                 <li>✓ Priority support</li>
               </ul>
             </div>
