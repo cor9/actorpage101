@@ -40,6 +40,14 @@ export default function NewActorPagePage() {
   };
 
   const createDefaultConfig = (name: string, tier: Tier): ActorPageConfig => {
+    // Create empty headshot slots based on tier
+    const headshotCount = tier === 'free' ? 3 : tier === 'standard' ? 8 : 10;
+    const emptyHeadshots = Array.from({ length: headshotCount }, (_, i) => ({
+      id: `hs-${i}-${Date.now()}`,
+      url: '',
+      alt: '',
+    }));
+
     return {
       tier,
       templateId: getTemplateIdForTier(tier),
@@ -61,7 +69,7 @@ export default function NewActorPagePage() {
           {
             id: 'main',
             label: 'Main',
-            images: [],
+            images: emptyHeadshots,
           },
         ],
       },
