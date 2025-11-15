@@ -51,6 +51,17 @@ create policy "users_can_delete_own_actor_pages"
   for delete
   using (auth.uid() = user_id);
 
+-- Admins can do anything with actor pages
+create policy "admins_can_manage_all_actor_pages"
+  on public.actor_pages
+  for all
+  using (
+    exists (
+      select 1 from public.profiles p
+      where p.id = auth.uid() and p.role = 'admin'
+    )
+  );
+
 -- Function to update updated_at timestamp
 create or replace function public.update_actor_pages_updated_at()
 returns trigger as $$
