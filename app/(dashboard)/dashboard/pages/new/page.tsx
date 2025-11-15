@@ -151,12 +151,12 @@ export default function NewActorPagePage() {
 
   return (
     <div className="max-w-2xl mx-auto">
-      <h1 className="text-3xl font-bold text-gray-900 mb-6">Create New Actor Page</h1>
+      <h1 className="text-3xl font-bold text-white mb-6">Create New Actor Page</h1>
 
-      <div className="bg-white shadow rounded-lg p-6 space-y-6">
+      <div className="bg-dark-purple/50 backdrop-blur-sm border border-neon-pink/30 shadow-xl rounded-lg p-6 space-y-6">
         {/* Actor Name */}
         <div>
-          <label htmlFor="actorName" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="actorName" className="block text-sm font-medium text-gray-300 mb-2">
             Actor Name
           </label>
           <input
@@ -164,35 +164,35 @@ export default function NewActorPagePage() {
             id="actorName"
             value={actorName}
             onChange={(e) => handleNameChange(e.target.value)}
-            className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+            className="w-full px-4 py-2 border border-neon-cyan/30 rounded-lg focus:ring-2 focus:ring-neon-pink focus:border-neon-pink"
             placeholder="Jordan Avery"
           />
         </div>
 
         {/* Slug */}
         <div>
-          <label htmlFor="slug" className="block text-sm font-medium text-gray-700 mb-2">
+          <label htmlFor="slug" className="block text-sm font-medium text-gray-300 mb-2">
             Page Slug
           </label>
           <div className="flex items-center gap-2">
-            <span className="text-gray-500 text-sm">actorpage101.site/actor/</span>
+            <span className="text-gray-400 text-sm">actorpage101.site/actor/</span>
             <input
               type="text"
               id="slug"
               value={slug}
               onChange={(e) => setSlug(e.target.value)}
-              className="flex-1 px-4 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+              className="flex-1 px-4 py-2 border border-neon-cyan/30 rounded-lg focus:ring-2 focus:ring-neon-pink focus:border-neon-pink"
               placeholder="jordan-avery"
             />
           </div>
-          <p className="mt-1 text-xs text-gray-500">
+          <p className="mt-1 text-xs text-gray-400">
             This will be your actor page&apos;s URL. Use lowercase letters, numbers, and hyphens only.
           </p>
         </div>
 
         {/* Tier Selection */}
         <div>
-          <label className="block text-sm font-medium text-gray-700 mb-3">
+          <label className="block text-sm font-medium text-gray-300 mb-3">
             Choose a Plan
           </label>
           <div className="grid md:grid-cols-3 gap-4">
@@ -201,12 +201,12 @@ export default function NewActorPagePage() {
               onClick={() => setTier('free')}
               className={`p-4 border-2 rounded-lg text-left transition-all ${
                 tier === 'free'
-                  ? 'border-indigo-600 bg-indigo-50'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-neon-pink bg-neon-pink/20'
+                  : 'border-neon-pink/20 hover:border-neon-cyan/30'
               }`}
             >
-              <div className="font-semibold text-gray-900 mb-1">Free</div>
-              <div className="text-xs text-gray-600">
+              <div className="font-semibold text-white mb-1">Free</div>
+              <div className="text-xs text-gray-400">
                 3 headshots, 1 reel, external resume link
               </div>
             </button>
@@ -216,12 +216,12 @@ export default function NewActorPagePage() {
               onClick={() => setTier('standard')}
               className={`p-4 border-2 rounded-lg text-left transition-all ${
                 tier === 'standard'
-                  ? 'border-indigo-600 bg-indigo-50'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-neon-pink bg-neon-pink/20'
+                  : 'border-neon-pink/20 hover:border-neon-cyan/30'
               }`}
             >
-              <div className="font-semibold text-gray-900 mb-1">Standard</div>
-              <div className="text-xs text-gray-600">
+              <div className="font-semibold text-white mb-1">Standard</div>
+              <div className="text-xs text-gray-400">
                 12 headshots, 4 reels, PDF resume, BTS preview
               </div>
             </button>
@@ -231,12 +231,12 @@ export default function NewActorPagePage() {
               onClick={() => setTier('premium')}
               className={`p-4 border-2 rounded-lg text-left transition-all ${
                 tier === 'premium'
-                  ? 'border-indigo-600 bg-indigo-50'
-                  : 'border-gray-200 hover:border-gray-300'
+                  ? 'border-neon-pink bg-neon-pink/20'
+                  : 'border-neon-pink/20 hover:border-neon-cyan/30'
               }`}
             >
-              <div className="font-semibold text-gray-900 mb-1">Premium</div>
-              <div className="text-xs text-gray-600">
+              <div className="font-semibold text-white mb-1">Premium</div>
+              <div className="text-xs text-gray-400">
                 Unlimited headshots/reels, structured resume, projects
               </div>
             </button>
@@ -245,8 +245,8 @@ export default function NewActorPagePage() {
 
         {/* Error Message */}
         {error && (
-          <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
-            <p className="text-sm text-red-800">{error}</p>
+          <div className="p-4 bg-neon-orange/10 border border-neon-orange/30 rounded-lg">
+            <p className="text-sm text-neon-orange">{error}</p>
           </div>
         )}
 
@@ -255,7 +255,7 @@ export default function NewActorPagePage() {
           <button
             type="button"
             onClick={() => router.back()}
-            className="px-4 py-2 text-gray-700 hover:text-gray-900"
+            className="px-4 py-2 text-gray-300 hover:text-white"
           >
             Cancel
           </button>
@@ -263,7 +263,7 @@ export default function NewActorPagePage() {
             type="button"
             onClick={handleCreate}
             disabled={isCreating}
-            className="px-6 py-2 bg-indigo-600 text-white rounded-lg hover:bg-indigo-700 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-6 py-2 bg-gradient-to-r from-neon-pink to-neon-cyan text-white rounded-lg hover:opacity-90 font-medium disabled:opacity-50 disabled:cursor-not-allowed"
           >
             {isCreating ? 'Creating...' : 'Create Actor Page'}
           </button>

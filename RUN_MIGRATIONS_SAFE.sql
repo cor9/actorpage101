@@ -1,8 +1,8 @@
 -- ============================================================================
--- Actor Page 101 - Safe Migrations (Idempotent)
+-- Actor Page 101 - FIXED Safe Migrations (No Infinite Recursion)
 -- ============================================================================
 --
--- This version is safe to run multiple times - it won't fail if things exist
+-- This version FIXES the infinite recursion error in RLS policies
 --
 -- INSTRUCTIONS:
 -- 1. Go to Supabase Dashboard → SQL Editor
@@ -29,41 +29,27 @@ create table if not exists public.profiles (
 -- Enable RLS on profiles
 alter table public.profiles enable row level security;
 
--- Drop existing policies if they exist, then recreate
+-- Drop ALL existing policies first
 drop policy if exists "users_can_view_own_profile" on public.profiles;
+drop policy if exists "users_can_update_own_profile" on public.profiles;
+drop policy if exists "admins_can_view_all_profiles" on public.profiles;
+drop policy if exists "admins_can_update_any_profile" on public.profiles;
+drop policy if exists "service_role_bypass" on public.profiles;
+
+-- FIXED POLICIES - No recursion!
+-- Simple policy: users can only see and update their own profile
 create policy "users_can_view_own_profile"
   on public.profiles
   for select
   using (auth.uid() = id);
 
-drop policy if exists "users_can_update_own_profile" on public.profiles;
 create policy "users_can_update_own_profile"
   on public.profiles
   for update
-  using (auth.uid() = id)
-  with check (auth.uid() = id and role = (select role from public.profiles where id = auth.uid()));
+  using (auth.uid() = id);
 
-drop policy if exists "admins_can_view_all_profiles" on public.profiles;
-create policy "admins_can_view_all_profiles"
-  on public.profiles
-  for select
-  using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
-  );
-
-drop policy if exists "admins_can_update_any_profile" on public.profiles;
-create policy "admins_can_update_any_profile"
-  on public.profiles
-  for update
-  using (
-    exists (
-      select 1 from public.profiles p
-      where p.id = auth.uid() and p.role = 'admin'
-    )
-  );
+-- Note: Admin access should be done via service role or direct SQL, not RLS
+-- This avoids infinite recursion since we can't check profiles from within profiles policies
 
 -- Create or replace functions and triggers
 create or replace function public.handle_new_user()
@@ -119,42 +105,84 @@ create index if not exists actor_pages_published_idx on public.actor_pages (is_p
 -- Enable RLS
 alter table public.actor_pages enable row level security;
 
--- Drop existing policies if they exist, then recreate
+-- Drop ALL existing policies first
 drop policy if exists "public_can_view_published_actor_pages" on public.actor_pages;
+drop policy if exists "users_can_view_own_actor_pages" on public.actor_pages;
+drop policy if exists "users_can_insert_own_actor_pages" on public.actor_pages;
+drop policy if exists "users_can_update_own_actor_pages" on public.actor_pages;
+drop policy if exists "users_can_delete_own_actor_pages" on public.actor_pages;
+drop policy if exists "admins_can_manage_all_actor_pages" on public.actor_pages;
+drop policy if exists "admins_can_view_all_actor_pages" on public.actor_pages;
+drop policy if exists "admins_can_update_all_actor_pages" on public.actor_pages;
+drop policy if exists "admins_can_delete_all_actor_pages" on public.actor_pages;
+
+-- RECREATE POLICIES - FIXED to avoid recursion
+-- Public can view published pages
 create policy "public_can_view_published_actor_pages"
   on public.actor_pages
   for select
   using (is_published = true);
 
-drop policy if exists "users_can_view_own_actor_pages" on public.actor_pages;
+-- Users can view their own actor pages
 create policy "users_can_view_own_actor_pages"
   on public.actor_pages
   for select
   using (auth.uid() = user_id);
 
-drop policy if exists "users_can_insert_own_actor_pages" on public.actor_pages;
+-- Users can insert their own actor pages
 create policy "users_can_insert_own_actor_pages"
   on public.actor_pages
   for insert
   with check (auth.uid() = user_id);
 
-drop policy if exists "users_can_update_own_actor_pages" on public.actor_pages;
+-- Users can update their own actor pages
 create policy "users_can_update_own_actor_pages"
   on public.actor_pages
   for update
   using (auth.uid() = user_id);
 
-drop policy if exists "users_can_delete_own_actor_pages" on public.actor_pages;
+-- Users can delete their own actor pages
 create policy "users_can_delete_own_actor_pages"
   on public.actor_pages
   for delete
   using (auth.uid() = user_id);
 
-drop policy if exists "admins_can_manage_all_actor_pages" on public.actor_pages;
-create policy "admins_can_manage_all_actor_pages"
+-- FIXED: Admin policy that checks profiles but from actor_pages table (safe!)
+-- This is OK because we're in actor_pages table querying profiles, not recursing on profiles
+create policy "admins_can_view_all_actor_pages"
   on public.actor_pages
-  for all
+  for select
   using (
+    exists (
+      select 1 from public.profiles p
+      where p.id = auth.uid() and p.role = 'admin'
+    )
+  );
+
+create policy "admins_can_update_all_actor_pages"
+  on public.actor_pages
+  for update
+  using (
+    exists (
+      select 1 from public.profiles p
+      where p.id = auth.uid() and p.role = 'admin'
+    )
+  );
+
+create policy "admins_can_delete_all_actor_pages"
+  on public.actor_pages
+  for delete
+  using (
+    exists (
+      select 1 from public.profiles p
+      where p.id = auth.uid() and p.role = 'admin'
+    )
+  );
+
+create policy "admins_can_insert_all_actor_pages"
+  on public.actor_pages
+  for insert
+  with check (
     exists (
       select 1 from public.profiles p
       where p.id = auth.uid() and p.role = 'admin'
