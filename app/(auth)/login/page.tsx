@@ -42,24 +42,29 @@ export default function LoginPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-900 to-slate-950 flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+    <div className="min-h-screen flex flex-col justify-center py-12 sm:px-6 lg:px-8" style={{ background: 'linear-gradient(135deg, #1c1c3e 0%, #5a347b 100%)' }}>
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
-        <h2 className="mt-6 text-center text-3xl font-extrabold text-slate-50">
+        <h2 className="mt-6 text-center text-3xl font-extrabold text-white" style={{ textShadow: '0 0 20px rgba(50, 240, 255, 0.5)' }}>
           Sign in to your account
         </h2>
-        <p className="mt-2 text-center text-sm text-slate-400">
+        <p className="mt-2 text-center text-sm text-gray-300">
           Or{' '}
-          <Link href="/signup" className="font-medium text-indigo-400 hover:text-indigo-300">
+          <Link href="/signup" className="font-medium transition-all" style={{ color: '#ff49db', textShadow: '0 0 10px rgba(255, 73, 219, 0.5)' }}>
             create a new account
           </Link>
         </p>
       </div>
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-        <div className="bg-slate-800/50 backdrop-blur-sm py-8 px-4 shadow-2xl sm:rounded-lg sm:px-10 border border-slate-700">
+        <div className="py-8 px-4 shadow-2xl sm:rounded-lg sm:px-10" style={{
+          backgroundColor: 'rgba(28, 28, 62, 0.8)',
+          backdropFilter: 'blur(10px)',
+          border: '1px solid rgba(50, 240, 255, 0.3)',
+          boxShadow: '0 0 30px rgba(50, 240, 255, 0.2)'
+        }}>
           <form className="space-y-6" onSubmit={handleLogin}>
             <div>
-              <label htmlFor="email" className="block text-sm font-medium text-slate-300">
+              <label htmlFor="email" className="block text-sm font-medium text-gray-200">
                 Email address
               </label>
               <div className="mt-1">
@@ -71,14 +76,26 @@ export default function LoginPage() {
                   required
                   value={email}
                   onChange={(e) => setEmail(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-600 rounded-md shadow-sm bg-slate-900 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="appearance-none block w-full px-3 py-2 rounded-md shadow-sm text-white placeholder-gray-400 focus:outline-none sm:text-sm transition-all"
+                  style={{
+                    backgroundColor: 'rgba(90, 52, 123, 0.3)',
+                    border: '1px solid rgba(50, 240, 255, 0.3)',
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.border = '1px solid #32f0ff';
+                    e.target.style.boxShadow = '0 0 15px rgba(50, 240, 255, 0.4)';
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.border = '1px solid rgba(50, 240, 255, 0.3)';
+                    e.target.style.boxShadow = 'none';
+                  }}
                   placeholder="you@example.com"
                 />
               </div>
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm font-medium text-slate-300">
+              <label htmlFor="password" className="block text-sm font-medium text-gray-200">
                 Password
               </label>
               <div className="mt-1">
@@ -90,15 +107,31 @@ export default function LoginPage() {
                   required
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="appearance-none block w-full px-3 py-2 border border-slate-600 rounded-md shadow-sm bg-slate-900 text-slate-100 placeholder-slate-500 focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="appearance-none block w-full px-3 py-2 rounded-md shadow-sm text-white placeholder-gray-400 focus:outline-none sm:text-sm transition-all"
+                  style={{
+                    backgroundColor: 'rgba(90, 52, 123, 0.3)',
+                    border: '1px solid rgba(50, 240, 255, 0.3)',
+                  }}
+                  onFocus={(e) => {
+                    e.target.style.border = '1px solid #32f0ff';
+                    e.target.style.boxShadow = '0 0 15px rgba(50, 240, 255, 0.4)';
+                  }}
+                  onBlur={(e) => {
+                    e.target.style.border = '1px solid rgba(50, 240, 255, 0.3)';
+                    e.target.style.boxShadow = 'none';
+                  }}
                   placeholder="Your password"
                 />
               </div>
             </div>
 
             {error && (
-              <div className="rounded-md bg-red-900/50 border border-red-700 p-4">
-                <div className="text-sm text-red-200">{error}</div>
+              <div className="rounded-md p-4" style={{
+                backgroundColor: 'rgba(255, 129, 50, 0.1)',
+                border: '1px solid #ff8132',
+                boxShadow: '0 0 10px rgba(255, 129, 50, 0.3)'
+              }}>
+                <div className="text-sm" style={{ color: '#ff8132' }}>{error}</div>
               </div>
             )}
 
@@ -106,7 +139,21 @@ export default function LoginPage() {
               <button
                 type="submit"
                 disabled={loading}
-                className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full flex justify-center py-2 px-4 rounded-md shadow-sm text-sm font-medium text-white focus:outline-none disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+                style={{
+                  background: 'linear-gradient(135deg, #32f0ff 0%, #ff49db 100%)',
+                  boxShadow: '0 0 20px rgba(50, 240, 255, 0.4)',
+                }}
+                onMouseEnter={(e) => {
+                  if (!loading) {
+                    e.currentTarget.style.boxShadow = '0 0 30px rgba(50, 240, 255, 0.6)';
+                    e.currentTarget.style.transform = 'translateY(-2px)';
+                  }
+                }}
+                onMouseLeave={(e) => {
+                  e.currentTarget.style.boxShadow = '0 0 20px rgba(50, 240, 255, 0.4)';
+                  e.currentTarget.style.transform = 'translateY(0)';
+                }}
               >
                 {loading ? 'Signing in...' : 'Sign in'}
               </button>
