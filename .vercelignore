@@ -1,0 +1,4 @@
+# Vercel Ignore
+.git
+.github
+node_modules
