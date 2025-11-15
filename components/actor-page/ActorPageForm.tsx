@@ -361,7 +361,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
   return (
     <form
       onSubmit={handleSubmit}
-      className="space-y-10 rounded-3xl bg-slate-950/70 p-6 md:p-8 border border-slate-800 shadow-2xl shadow-slate-950/70"
+      className="space-y-10 rounded-3xl bg-dark-purple/70 p-6 md:p-8 border border-neon-pink/20 shadow-2xl shadow-neon-pink/30"
     >
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
@@ -375,7 +375,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
           <select
             value={config.tier}
             onChange={(e) => handleTierChange(e.target.value as Tier)}
-            className="rounded-full bg-slate-900 border border-slate-700 px-3 py-1 text-xs"
+            className="rounded-full bg-deep-purple border border-neon-cyan/30 px-3 py-1 text-xs"
           >
             {tierOptions.map((tier) => (
               <option key={tier} value={tier}>
@@ -387,7 +387,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
       </div>
 
       {/* STYLE & LAYOUT */}
-      <section className="space-y-4 rounded-2xl bg-slate-900/70 border border-slate-800 p-4 md:p-5">
+      <section className="space-y-4 rounded-2xl bg-deep-purple/70 border border-neon-pink/20 p-4 md:p-5">
         <h2 className="text-sm font-semibold uppercase tracking-[0.18em] text-slate-300">
           Style & Layout
         </h2>
@@ -403,8 +403,8 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                 onClick={() => updateTheme('themeId', opt.id)}
                 className={`flex flex-col items-stretch rounded-2xl border px-2 py-2 text-left text-[11px] ${
                   theme.themeId === opt.id
-                    ? 'border-indigo-400 shadow-md shadow-indigo-900/70'
-                    : 'border-slate-700'
+                    ? 'border-neon-pink shadow-md shadow-neon-pink/50'
+                    : 'border-neon-cyan/30'
                 }`}
               >
                 <div className={`h-10 w-full rounded-xl ${opt.previewClass}`} />
@@ -425,7 +425,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               onChange={(e) =>
                 updateTheme('headingFont', e.target.value as FontPreset)
               }
-              className="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+              className="w-full rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
             >
               {fontOptions.map((f) => (
                 <option key={f.id} value={f.id}>
@@ -441,7 +441,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               onChange={(e) =>
                 updateTheme('bodyFont', e.target.value as FontPreset)
               }
-              className="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+              className="w-full rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
             >
               {fontOptions.map((f) => (
                 <option key={f.id} value={f.id}>
@@ -463,8 +463,8 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                 onClick={() => updateTheme('iconStyle', opt.id)}
                 className={`rounded-full border px-3 py-1 text-[11px] ${
                   theme.iconStyle === opt.id
-                    ? 'border-indigo-400 bg-slate-900/80'
-                    : 'border-slate-700 bg-slate-950'
+                    ? 'border-neon-pink bg-deep-purple/80'
+                    : 'border-neon-cyan/30 bg-dark-purple'
                 }`}
               >
                 {opt.label}
@@ -483,13 +483,13 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               type="color"
               value={theme.accentColorHex || '#6366f1'}
               onChange={(e) => updateTheme('accentColorHex', e.target.value)}
-              className="h-6 w-10 rounded border border-slate-700 bg-slate-900"
+              className="h-6 w-10 rounded border border-neon-cyan/30 bg-deep-purple"
             />
             <input
               type="text"
               value={theme.accentColorHex || ''}
               onChange={(e) => updateTheme('accentColorHex', e.target.value)}
-              className="flex-1 rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+              className="flex-1 rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
               placeholder="#6366f1"
             />
           </div>
@@ -509,7 +509,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                   type="checkbox"
                   checked={extras.includes('press_section')}
                   onChange={() => toggleExtra('press_section')}
-                  className="h-3 w-3 rounded border-slate-600 bg-slate-900"
+                  className="h-3 w-3 rounded border-slate-600 bg-deep-purple"
                 />
                 Press / Awards
               </label>
@@ -518,7 +518,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                   type="checkbox"
                   checked={extras.includes('project_gallery')}
                   onChange={() => toggleExtra('project_gallery')}
-                  className="h-3 w-3 rounded border-slate-600 bg-slate-900"
+                  className="h-3 w-3 rounded border-slate-600 bg-deep-purple"
                 />
                 Project Gallery
               </label>
@@ -527,7 +527,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                   type="checkbox"
                   checked={extras.includes('bts_albums')}
                   onChange={() => toggleExtra('bts_albums')}
-                  className="h-3 w-3 rounded border-slate-600 bg-slate-900"
+                  className="h-3 w-3 rounded border-slate-600 bg-deep-purple"
                 />
                 BTS Albums
               </label>
@@ -536,7 +536,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                   type="checkbox"
                   checked={extras.includes('custom_cta')}
                   onChange={() => toggleExtra('custom_cta')}
-                  className="h-3 w-3 rounded border-slate-600 bg-slate-900"
+                  className="h-3 w-3 rounded border-slate-600 bg-deep-purple"
                 />
                 Custom CTA Button
               </label>
@@ -557,14 +557,14 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               type="text"
               value={config.hero.name}
               onChange={(e) => updateHero('name', e.target.value)}
-              className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm"
+              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-sm"
             />
             <label className="block mt-3 text-xs text-slate-300">Headshot URL</label>
             <input
               type="text"
               value={config.hero.headshotUrl}
               onChange={(e) => updateHero('headshotUrl', e.target.value)}
-              className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm"
+              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-sm"
             />
             <label className="block mt-3 text-xs text-slate-300">
               Location (Local Hire)
@@ -573,14 +573,14 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               type="text"
               value={config.hero.location ?? ''}
               onChange={(e) => updateHero('location', e.target.value)}
-              className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm"
+              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-sm"
             />
             <label className="block mt-3 text-xs text-slate-300">Age Range</label>
             <input
               type="text"
               value={config.hero.ageRange ?? ''}
               onChange={(e) => updateHero('ageRange', e.target.value)}
-              className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm"
+              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-sm"
             />
           </div>
 
@@ -590,7 +590,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               type="text"
               value={config.hero.brandLine ?? ''}
               onChange={(e) => updateHero('brandLine', e.target.value)}
-              className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm"
+              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-sm"
               placeholder="Single-Cam Comedy • Teen Drama"
             />
             <label className="block mt-3 text-xs text-slate-300">Casting Type</label>
@@ -598,7 +598,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               type="text"
               value={config.hero.castingType ?? ''}
               onChange={(e) => updateHero('castingType', e.target.value)}
-              className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm"
+              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-sm"
               placeholder="Funny, sharp, a little oddball"
             />
             <label className="block mt-3 text-xs text-slate-300">Union Status</label>
@@ -606,7 +606,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               type="text"
               value={config.hero.unionStatus ?? ''}
               onChange={(e) => updateHero('unionStatus', e.target.value)}
-              className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm"
+              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-sm"
               placeholder="SAG-AFTRA Eligible"
             />
             <label className="block mt-3 text-xs text-slate-300">
@@ -624,7 +624,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                     .filter(Boolean)
                 )
               }
-              className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-sm"
+              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-sm"
             />
           </div>
         </div>
@@ -641,7 +641,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
             return (
               <div
                 key={index}
-                className="flex flex-col gap-2 rounded-xl bg-slate-900/80 border border-slate-700 p-3"
+                className="flex flex-col gap-2 rounded-xl bg-deep-purple/80 border border-neon-cyan/30 p-3"
               >
                 <div className="flex flex-col md:flex-row md:items-center gap-2">
                   <select
@@ -649,7 +649,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                     onChange={(e) =>
                       handleSocialChange(index, 'platform', e.target.value)
                     }
-                    className="rounded-lg bg-slate-950 border border-slate-700 px-2 py-2 text-xs md:w-40"
+                    className="rounded-lg bg-dark-purple border border-neon-cyan/30 px-2 py-2 text-xs md:w-40"
                   >
                     {socialPlatforms.map((p) => (
                       <option key={p} value={p}>
@@ -663,7 +663,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                     onChange={(e) =>
                       handleSocialChange(index, 'url', e.target.value)
                     }
-                    className="flex-1 rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+                    className="flex-1 rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
                     placeholder="https://..."
                   />
                 </div>
@@ -676,7 +676,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                       onChange={(e) =>
                         handleSocialChange(index, 'label', e.target.value)
                       }
-                      className="flex-1 rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+                      className="flex-1 rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
                       placeholder="Link label (e.g., Casting Networks)"
                     />
                     <input
@@ -685,7 +685,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                       onChange={(e) =>
                         handleSocialChange(index, 'iconName', e.target.value)
                       }
-                      className="flex-1 rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+                      className="flex-1 rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
                       placeholder="Icon name (link, star, camera, clapperboard...)"
                     />
                   </div>
@@ -705,7 +705,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         <button
           type="button"
           onClick={handleAddSocial}
-          className="rounded-full border border-slate-600 px-3 py-1 text-xs hover:bg-slate-900/60"
+          className="rounded-full border border-slate-600 px-3 py-1 text-xs hover:bg-deep-purple/60"
         >
           + Add Social Link
         </button>
@@ -723,7 +723,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
           {config.headshots.galleries[0]?.images.map((img, index) => (
             <div
               key={img.id}
-              className="flex flex-col gap-2 rounded-xl bg-slate-900/80 border border-slate-700 p-3 md:flex-row md:items-center"
+              className="flex flex-col gap-2 rounded-xl bg-deep-purple/80 border border-neon-cyan/30 p-3 md:flex-row md:items-center"
             >
               <input
                 type="text"
@@ -731,7 +731,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                 onChange={(e) =>
                   handleHeadshotChange(index, 'url', e.target.value)
                 }
-                className="flex-1 rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+                className="flex-1 rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
                 placeholder="Image URL"
               />
               <input
@@ -740,7 +740,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                 onChange={(e) =>
                   handleHeadshotChange(index, 'alt', e.target.value)
                 }
-                className="flex-1 rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+                className="flex-1 rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
                 placeholder="Alt text (optional)"
               />
               <button
@@ -756,7 +756,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         <button
           type="button"
           onClick={handleAddHeadshot}
-          className="rounded-full border border-slate-600 px-3 py-1 text-xs hover:bg-slate-900/60"
+          className="rounded-full border border-slate-600 px-3 py-1 text-xs hover:bg-deep-purple/60"
         >
           + Add Headshot
         </button>
@@ -774,7 +774,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
           {config.reels.items.map((reel, index) => (
             <div
               key={reel.id}
-              className="flex flex-col gap-2 rounded-xl bg-slate-900/80 border border-slate-700 p-3"
+              className="flex flex-col gap-2 rounded-xl bg-deep-purple/80 border border-neon-cyan/30 p-3"
             >
               <div className="flex flex-col md:flex-row md:items-center gap-2">
                 <input
@@ -783,7 +783,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                   onChange={(e) =>
                     handleReelChange(index, 'title', e.target.value)
                   }
-                  className="flex-1 rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+                  className="flex-1 rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
                   placeholder="Title (e.g., Theatrical Reel)"
                 />
                 <input
@@ -792,7 +792,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                   onChange={(e) =>
                     handleReelChange(index, 'projectLabel', e.target.value)
                   }
-                  className="flex-1 rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+                  className="flex-1 rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
                   placeholder="Project label (e.g., Hulu, NBC)"
                 />
               </div>
@@ -802,7 +802,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                 onChange={(e) =>
                   handleReelChange(index, 'vimeoUrl', e.target.value)
                 }
-                className="w-full rounded-lg bg-slate-950 border border-slate-700 px-3 py-2 text-xs"
+                className="w-full rounded-lg bg-dark-purple border border-neon-cyan/30 px-3 py-2 text-xs"
                 placeholder="Vimeo embed URL"
               />
               <button
@@ -818,7 +818,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         <button
           type="button"
           onClick={handleAddReel}
-          className="rounded-full border border-slate-600 px-3 py-1 text-xs hover:bg-slate-900/60"
+          className="rounded-full border border-slate-600 px-3 py-1 text-xs hover:bg-deep-purple/60"
         >
           + Add Reel
         </button>
@@ -836,7 +836,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
             onChange={(e) =>
               updateResume('mode', e.target.value as ResumeMode)
             }
-            className="rounded-full bg-slate-900 border border-slate-700 px-3 py-1 text-xs"
+            className="rounded-full bg-deep-purple border border-neon-cyan/30 px-3 py-1 text-xs"
           >
             {resumeModes.map((mode) => (
               <option
@@ -863,7 +863,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               type="text"
               value={config.resume.externalUrl ?? ''}
               onChange={(e) => updateResume('externalUrl', e.target.value)}
-              className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-xs"
+              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-xs"
               placeholder="https://drive.google.com/..."
             />
           </div>
@@ -876,7 +876,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
               type="text"
               value={config.resume.pdfUrl ?? ''}
               onChange={(e) => updateResume('pdfUrl', e.target.value)}
-              className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-xs"
+              className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-xs"
               placeholder="/path/to/resume.pdf or https://..."
             />
           </div>
@@ -899,7 +899,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                       .filter(Boolean)
                   )
                 }
-                className="w-full min-h-[100px] rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-xs"
+                className="w-full min-h-[100px] rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-xs"
               />
               <label className="block text-xs text-slate-300">
                 Theatre Credits (one per line)
@@ -915,7 +915,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                       .filter(Boolean)
                   )
                 }
-                className="w-full min-h-[100px] rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-xs"
+                className="w-full min-h-[100px] rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-xs"
               />
             </div>
             <div className="space-y-2">
@@ -933,7 +933,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                       .filter(Boolean)
                   )
                 }
-                className="w-full min-h-[100px] rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-xs"
+                className="w-full min-h-[100px] rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-xs"
               />
               <label className="block text-xs text-slate-300">
                 Skills (comma-separated)
@@ -950,7 +950,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
                       .filter(Boolean)
                   )
                 }
-                className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-xs"
+                className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-xs"
               />
             </div>
           </div>
@@ -968,14 +968,14 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
             type="email"
             value={config.contact.parentEmail}
             onChange={(e) => updateContact('parentEmail', e.target.value)}
-            className="w-full rounded-lg bg-slate-900 border border-slate-700 px-3 py-2 text-xs"
+            className="w-full rounded-lg bg-deep-purple border border-neon-cyan/30 px-3 py-2 text-xs"
           />
           <label className="inline-flex items-center gap-2 text-xs text-slate-300 mt-2">
             <input
               type="checkbox"
               checked={config.contact.showReps}
               onChange={(e) => updateContact('showReps', e.target.checked)}
-              className="h-3 w-3 rounded border-slate-600 bg-slate-900"
+              className="h-3 w-3 rounded border-slate-600 bg-deep-purple"
             />
             Show representation details on page (Standard/Premium only)
           </label>
@@ -991,7 +991,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         <button
           type="submit"
           disabled={isSaving}
-          className="rounded-full bg-indigo-600/90 px-5 py-2 text-xs font-semibold hover:bg-indigo-500 disabled:opacity-60"
+          className="rounded-full bg-neon-pink/90 px-5 py-2 text-xs font-semibold hover:bg-indigo-500 disabled:opacity-60"
         >
           {isSaving ? 'Saving...' : 'Save Changes'}
         </button>
