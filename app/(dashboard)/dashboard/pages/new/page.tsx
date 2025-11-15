@@ -40,6 +40,14 @@ export default function NewActorPagePage() {
   };
 
   const createDefaultConfig = (name: string, tier: Tier): ActorPageConfig => {
+    // Create empty headshot slots based on tier
+    const headshotCount = tier === 'free' ? 2 : tier === 'standard' ? 5 : 10;
+    const emptyHeadshots = Array.from({ length: headshotCount }, (_, i) => ({
+      id: `hs-${i}-${Date.now()}`,
+      url: '',
+      alt: '',
+    }));
+
     return {
       tier,
       templateId: getTemplateIdForTier(tier),
@@ -61,7 +69,7 @@ export default function NewActorPagePage() {
           {
             id: 'main',
             label: 'Main',
-            images: [],
+            images: emptyHeadshots,
           },
         ],
       },
@@ -207,7 +215,7 @@ export default function NewActorPagePage() {
             >
               <div className="font-semibold text-white mb-1">Free</div>
               <div className="text-xs text-gray-400">
-                3 headshots, 1 reel, external resume link
+                2 headshots, 1 reel, external resume link
               </div>
             </button>
 
@@ -222,7 +230,7 @@ export default function NewActorPagePage() {
             >
               <div className="font-semibold text-white mb-1">Standard</div>
               <div className="text-xs text-gray-400">
-                12 headshots, 4 reels, PDF resume, BTS preview
+                5 headshots, 4 reels, PDF resume, BTS preview
               </div>
             </button>
 
