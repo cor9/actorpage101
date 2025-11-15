@@ -7,11 +7,38 @@ export type TemplateId =
   | 'standard-showcase'    // Standard
   | 'premium-cinematic';   // Premium
 
-export type SocialPlatform = 'instagram' | 'youtube' | 'tiktok' | 'imdb' | 'email' | 'website';
+export type SocialPlatform = 'instagram' | 'youtube' | 'tiktok' | 'imdb' | 'email' | 'website' | 'other';
+
+export type FontPreset = 'classic' | 'rounded' | 'serif' | 'condensed';
+
+export type ThemeId =
+  | 'hollywood_night'
+  | 'soft_lilac'
+  | 'warm_slate'
+  | 'teal_stage';
+
+export type IconStyle = 'hex' | 'circle' | 'rounded_square';
+
+export type ExtraElement =
+  | 'press_section'
+  | 'project_gallery'
+  | 'bts_albums'
+  | 'custom_cta';
+
+export interface ThemeConfig {
+  themeId: ThemeId;
+  headingFont: FontPreset;
+  bodyFont: FontPreset;
+  iconStyle: IconStyle;
+  accentColorHex?: string;      // optional "advanced" override
+  extrasEnabled: ExtraElement[]; // what "extra" blocks are on
+}
 
 export interface SocialLink {
   platform: SocialPlatform;
   url: string;
+  label?: string;        // for "other"
+  iconName?: string;     // 'link', 'star', 'camera', 'clapperboard', etc.
 }
 
 export interface RepInfo {
@@ -92,6 +119,7 @@ export interface ContactConfig {
 export interface ActorPageConfig {
   tier: Tier;
   templateId: TemplateId;
+  theme?: ThemeConfig;     // Optional for backward compatibility
   hero: HeroConfig;
   headshots: {
     galleries: HeadshotGallery[];
