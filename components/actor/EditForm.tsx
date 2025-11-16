@@ -108,7 +108,10 @@ export const EditForm: React.FC<Props> = ({ initialData, onSave, isSaving }) => 
         .from('photos')
         .upload(filePath, file);
 
-      if (uploadError) throw uploadError;
+      if (uploadError) {
+        console.error('Supabase upload error:', uploadError);
+        throw new Error(`Upload failed: ${uploadError.message}`);
+      }
 
       // Get public URL
       const { data: { publicUrl } } = supabase.storage
@@ -121,7 +124,8 @@ export const EditForm: React.FC<Props> = ({ initialData, onSave, isSaving }) => 
       setUploadingPhotos({ ...uploadingPhotos, [index]: false });
     } catch (error) {
       console.error('Error uploading photo:', error);
-      alert('Failed to upload photo. Please try again.');
+      const errorMessage = error instanceof Error ? error.message : 'Failed to upload photo. Please try again.';
+      alert(errorMessage);
       setUploadingPhotos({ ...uploadingPhotos, [index]: false });
     }
   };
