@@ -45,16 +45,15 @@ export default function MarketingPage() {
       </nav>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
-        <div className="relative mb-16 overflow-hidden rounded-2xl border border-neon-pink/20 bg-dark-purple" style={{ boxShadow: '0 0 30px rgba(255, 73, 219, 0.15)' }}>
+        <div className="mb-16 flex justify-center">
           <Image
             src="/hero.jpg"
             alt="Actor Page 101 Hero"
-            width={1600}
-            height={600}
-            className="w-full h-[280px] md:h-[420px] object-contain"
+            width={1200}
+            height={675}
+            className="max-h-[420px] w-auto rounded-2xl shadow-xl"
             priority
           />
-          <div className="absolute inset-0 pointer-events-none bg-gradient-to-t from-dark-purple/60 via-deep-purple/20 to-transparent" />
         </div>
         <div className="text-center">
           <h1 className="text-5xl font-bold text-white mb-6" style={{ textShadow: '0 0 20px rgba(255, 73, 219, 0.5)' }}>
