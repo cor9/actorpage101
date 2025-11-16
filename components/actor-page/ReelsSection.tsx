@@ -44,7 +44,9 @@ export const ReelsSection: React.FC<Props> = ({ tier, reels }) => {
                 src={normalizeVimeoEmbed(reel.vimeoUrl)}
                 title={reel.title}
                 className="h-full w-full"
-                allow="autoplay; fullscreen; picture-in-picture"
+                allow="autoplay; fullscreen; picture-in-picture; encrypted-media"
+                allowFullScreen
+                frameBorder="0"
               />
             </div>
           </div>
