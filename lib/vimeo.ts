@@ -19,23 +19,7 @@ export function getVimeoConfig(): VimeoConfig {
   };
 }
 
-/**
- * Upload a video to Vimeo
- * @param file - The video file to upload
- * @param title - Video title
- * @param description - Video description
- */
-export async function uploadToVimeo(
-  file: File,
-  title: string,
-  description?: string
-): Promise<string> {
-  const config = getVimeoConfig();
-
-  // Implementation will use Vimeo API to upload videos
-  // This is a placeholder for now
-  throw new Error('Vimeo upload not yet implemented');
-}
+// Note: We currently embed user-provided Vimeo links only. No upload API is used.
 
 /**
  * Get Vimeo embed URL from video ID
@@ -59,4 +43,27 @@ export function extractVimeoId(url: string): string | null {
   }
 
   return null;
+}
+
+/**
+ * Normalize any Vimeo URL or ID into an embeddable URL.
+ * If input is already an embed URL, returns it as-is.
+ */
+export function normalizeVimeoEmbed(input: string): string {
+  if (!input) return '';
+  // If already an embed URL, keep it
+  if (/^https?:\/\/player\.vimeo\.com\/video\/\d+/.test(input)) {
+    return input;
+  }
+  // If it's a plain vimeo URL, extract and convert
+  const id = extractVimeoId(input);
+  if (id) {
+    return getVimeoEmbedUrl(id);
+  }
+  // If it looks like a numeric ID, treat as ID
+  if (/^\d+$/.test(input.trim())) {
+    return getVimeoEmbedUrl(input.trim());
+  }
+  // Fallback: return original (consumer can decide to reject/validate)
+  return input;
 }

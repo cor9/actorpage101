@@ -1,10 +1,10 @@
-import { notFound } from 'next/navigation';
-import { createServerSupabaseClient } from '@/lib/supabaseServer';
-import { ActorPageLayout } from '@/components/actor-page/ActorPageLayout';
-import { ActorPageConfig } from '@/components/actor-page/types';
+import { notFound } from "next/navigation";
+import { createServerSupabaseClient } from "@/lib/supabaseServer";
+import { ActorPageLayout } from "@/components/actor-page/ActorPageLayout";
+import { ActorPageConfig } from "@/components/actor-page/types";
 
 interface PageProps {
-  params: Promise<{ slug: string }>;
+  params: { slug: string };
 }
 
 export const revalidate = 3600; // Revalidate every hour
@@ -13,10 +13,10 @@ async function getActorPage(slug: string) {
   const supabase = await createServerSupabaseClient();
 
   const { data, error } = await supabase
-    .from('actor_pages')
-    .select('tier, template_id, config, is_published')
-    .eq('slug', slug)
-    .eq('is_published', true)
+    .from("actor_pages")
+    .select("tier, template_id, config, is_published")
+    .eq("slug", slug)
+    .eq("is_published", true)
     .single();
 
   if (error || !data) {
@@ -27,7 +27,7 @@ async function getActorPage(slug: string) {
 }
 
 export default async function ActorPage({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const data = await getActorPage(slug);
 
   if (!data) {
@@ -45,18 +45,18 @@ export default async function ActorPage({ params }: PageProps) {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const data = await getActorPage(slug);
 
   if (!data) {
     return {
-      title: 'Actor Not Found',
+      title: "Actor Not Found",
     };
   }
 
   const config = data.config as ActorPageConfig;
-  const name = config.hero.name || 'Actor';
-  const brandLine = config.hero.brandLine || 'Actor Portfolio';
+  const name = config.hero.name || "Actor";
+  const brandLine = config.hero.brandLine || "Actor Portfolio";
 
   return {
     title: `${name} - ${brandLine}`,

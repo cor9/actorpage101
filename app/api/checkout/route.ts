@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 import { createServerSupabaseClient } from '@/lib/supabaseServer';
+import { STRIPE_PRICE_IDS } from '@/lib/stripe';
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2023-10-16',
@@ -25,13 +26,34 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
     }
 
+    // Validate and normalize price against server allowlist
+    const normalizedInterval = String(interval).toLowerCase() as 'monthly' | 'yearly';
+    const normalizedTier = String(tier).toLowerCase() as 'standard' | 'premium';
+
+    if (!['standard', 'premium'].includes(normalizedTier)) {
+      return NextResponse.json({ error: 'Invalid tier' }, { status: 400 });
+    }
+    if (!['monthly', 'yearly'].includes(normalizedInterval)) {
+      return NextResponse.json({ error: 'Invalid interval' }, { status: 400 });
+    }
+
+    const allowedPriceId =
+      STRIPE_PRICE_IDS[normalizedTier as 'standard' | 'premium'][normalizedInterval];
+
+    if (!allowedPriceId) {
+      return NextResponse.json({ error: 'Price not configured on server' }, { status: 500 });
+    }
+
+    // If client provided priceId doesn't match allowlist, ignore client value
+    const finalPriceId = priceId === allowedPriceId ? priceId : allowedPriceId;
+
     // Create Stripe checkout session
     const session = await stripe.checkout.sessions.create({
       customer_email: user.email,
       client_reference_id: user.id,
       line_items: [
         {
-          price: priceId,
+          price: finalPriceId,
           quantity: 1,
         },
       ],

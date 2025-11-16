@@ -1,5 +1,6 @@
 import React from 'react';
 import { Tier, ReelItem } from './types';
+import { normalizeVimeoEmbed } from '@/lib/vimeo';
 
 interface Props {
   tier: Tier;
@@ -40,7 +41,7 @@ export const ReelsSection: React.FC<Props> = ({ tier, reels }) => {
             )}
             <div className="aspect-video overflow-hidden rounded-xl border border-slate-800/80 bg-black">
               <iframe
-                src={reel.vimeoUrl}
+                src={normalizeVimeoEmbed(reel.vimeoUrl)}
                 title={reel.title}
                 className="h-full w-full"
                 allow="autoplay; fullscreen; picture-in-picture"

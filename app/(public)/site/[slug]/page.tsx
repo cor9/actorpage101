@@ -6,9 +6,9 @@ import ClassicTemplate from '@/components/templates/ClassicTemplate';
 export const revalidate = 3600; // Revalidate every hour
 
 interface PageProps {
-  params: Promise<{
+  params: {
     slug: string;
-  }>;
+  };
 }
 
 async function getActorSite(slug: string) {
@@ -71,7 +71,7 @@ async function getActorSite(slug: string) {
 }
 
 export default async function ActorSitePage({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const data = await getActorSite(slug);
 
   if (!data) {
@@ -124,7 +124,7 @@ export default async function ActorSitePage({ params }: PageProps) {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = await params;
+  const { slug } = params;
   const data = await getActorSite(slug);
 
   if (!data) {
