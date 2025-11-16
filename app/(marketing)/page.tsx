@@ -104,48 +104,94 @@ export default function MarketingPage() {
         </div>
 
         <section className="mt-20">
-          <h2 className="text-3xl font-bold text-white mb-6" style={{ textShadow: '0 0 12px rgba(255, 73, 219, 0.4)' }}>
+          <h2 className="text-3xl font-bold text-white mb-10 text-center" style={{ textShadow: '0 0 12px rgba(255, 73, 219, 0.4)' }}>
             Live Demos
           </h2>
-          <p className="text-gray-300 mb-6">
-            Explore example pages by tier and by template, rendered with mock content.
-          </p>
-          <div className="grid gap-6 md:grid-cols-2">
-            <div className="rounded-xl border border-neon-pink/30 bg-dark-purple/60 p-6">
-              <h3 className="text-xl font-semibold text-white mb-2">By Tier</h3>
-              <p className="text-gray-300 mb-4">See what each plan includes.</p>
-              <div className="flex flex-wrap gap-3">
-                <Link href="/demo/free" className="rounded-lg border border-neon-pink/30 px-4 py-2 hover:bg-dark-purple/70 transition-colors text-white">
-                  Free Demo
-                </Link>
-                <Link href="/demo/standard" className="rounded-lg border border-neon-pink/30 px-4 py-2 hover:bg-dark-purple/70 transition-colors text-white">
-                  Standard Demo
-                </Link>
-                <Link href="/demo/premium" className="rounded-lg border border-neon-pink/30 px-4 py-2 hover:bg-dark-purple/70 transition-colors text-white">
-                  Premium Demo
-                </Link>
+          <div className="grid gap-8 md:grid-cols-3">
+            <Link href="/demo/free" className="group rounded-2xl overflow-hidden border border-neon-pink/30 bg-gradient-to-b from-deep-purple/60 to-dark-purple/80 hover:from-deep-purple/70 transition-all">
+              <div className="relative h-40 overflow-hidden">
+                <Image src="/hero.jpg" alt="Free Demo" width={800} height={400} className="h-full w-full object-cover opacity-70 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-purple/90 to-transparent" />
               </div>
-            </div>
-            <div className="rounded-xl border border-neon-pink/30 bg-dark-purple/60 p-6">
-              <h3 className="text-xl font-semibold text-white mb-2">By Template</h3>
-              <p className="text-gray-300 mb-4">Preview each layout style.</p>
-              <div className="flex flex-wrap gap-3">
-                <Link href="/demo/templates/mini-portfolio" className="rounded-lg border border-neon-pink/30 px-4 py-2 hover:bg-dark-purple/70 transition-colors text-white">
-                  Mini Portfolio
-                </Link>
-                <Link href="/demo/templates/standard-showcase" className="rounded-lg border border-neon-pink/30 px-4 py-2 hover:bg-dark-purple/70 transition-colors text-white">
-                  Standard Showcase
-                </Link>
-                <Link href="/demo/templates/premium-cinematic" className="rounded-lg border border-neon-pink/30 px-4 py-2 hover:bg-dark-purple/70 transition-colors text-white">
-                  Premium Cinematic
-                </Link>
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-white">Free Demo</h3>
+                <p className="text-sm text-gray-300 mt-1">Mini Portfolio – clean, focused starter.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-neon-cyan">
+                  View demo
+                  <span>→</span>
+                </div>
               </div>
-              <div className="mt-4">
-                <Link href="/demo/templates" className="text-neon-cyan underline underline-offset-4">
-                  View all template samples
-                </Link>
+            </Link>
+            <Link href="/demo/standard" className="group rounded-2xl overflow-hidden border border-neon-pink/30 bg-gradient-to-b from-deep-purple/60 to-dark-purple/80 hover:from-deep-purple/70 transition-all">
+              <div className="relative h-40 overflow-hidden">
+                <Image src="/hero.jpg" alt="Standard Demo" width={800} height={400} className="h-full w-full object-cover opacity-70 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-purple/90 to-transparent" />
               </div>
-            </div>
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-white">Standard Demo</h3>
+                <p className="text-sm text-gray-300 mt-1">Standard Showcase – more sections, more polish.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-neon-cyan">
+                  View demo
+                  <span>→</span>
+                </div>
+              </div>
+            </Link>
+            <Link href="/demo/premium" className="group rounded-2xl overflow-hidden border border-neon-pink/30 bg-gradient-to-b from-deep-purple/60 to-dark-purple/80 hover:from-deep-purple/70 transition-all">
+              <div className="relative h-40 overflow-hidden">
+                <Image src="/hero.jpg" alt="Premium Demo" width={800} height={400} className="h-full w-full object-cover opacity-70 group-hover:opacity-90 transition-opacity" />
+                <div className="absolute inset-0 bg-gradient-to-t from-dark-purple/90 to-transparent" />
+              </div>
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-white">Premium Demo</h3>
+                <p className="text-sm text-gray-300 mt-1">Premium Cinematic – hero + projects + BTS.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-neon-cyan">
+                  View demo
+                  <span>→</span>
+                </div>
+              </div>
+            </Link>
+          </div>
+
+          <div className="mt-10 grid gap-8 md:grid-cols-3">
+            <Link href="/demo/templates/mini-portfolio" className="group rounded-2xl overflow-hidden border border-neon-pink/30 bg-gradient-to-b from-deep-purple/60 to-dark-purple/80 hover:from-deep-purple/70 transition-all">
+              <div className="relative h-40 overflow-hidden flex items-center justify-center bg-dark-purple">
+                <Image src="/logotransparent.png" alt="Mini Portfolio" width={260} height={260} className="opacity-90 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-white">Mini Portfolio</h3>
+                <p className="text-sm text-gray-300 mt-1">Simple and fast, great for getting started.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-neon-cyan">
+                  View template
+                  <span>→</span>
+                </div>
+              </div>
+            </Link>
+            <Link href="/demo/templates/standard-showcase" className="group rounded-2xl overflow-hidden border border-neon-pink/30 bg-gradient-to-b from-deep-purple/60 to-dark-purple/80 hover:from-deep-purple/70 transition-all">
+              <div className="relative h-40 overflow-hidden flex items-center justify-center bg-dark-purple">
+                <Image src="/logotransparent.png" alt="Standard Showcase" width={260} height={260} className="opacity-90 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-white">Standard Showcase</h3>
+                <p className="text-sm text-gray-300 mt-1">Balanced layout for growing portfolios.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-neon-cyan">
+                  View template
+                  <span>→</span>
+                </div>
+              </div>
+            </Link>
+            <Link href="/demo/templates/premium-cinematic" className="group rounded-2xl overflow-hidden border border-neon-pink/30 bg-gradient-to-b from-deep-purple/60 to-dark-purple/80 hover:from-deep-purple/70 transition-all">
+              <div className="relative h-40 overflow-hidden flex items-center justify-center bg-dark-purple">
+                <Image src="/logotransparent.png" alt="Premium Cinematic" width={260} height={260} className="opacity-90 group-hover:opacity-100 transition-opacity" />
+              </div>
+              <div className="p-5">
+                <h3 className="text-lg font-semibold text-white">Premium Cinematic</h3>
+                <p className="text-sm text-gray-300 mt-1">Cinematic hero, projects, full BTS albums.</p>
+                <div className="mt-4 inline-flex items-center gap-2 text-neon-cyan">
+                  View template
+                  <span>→</span>
+                </div>
+              </div>
+            </Link>
           </div>
         </section>
 
