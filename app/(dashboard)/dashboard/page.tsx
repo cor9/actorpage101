@@ -138,7 +138,7 @@ export default async function DashboardPage() {
                         </a>
                       )}
                       <Link
-                        href={`/dashboard/pages/${page.id}/edit`}
+                        href={`/dashboard/pages/${page.id}/edit-v2`}
                         className="text-neon-pink hover:text-neon-cyan transition-colors"
                       >
                         Edit

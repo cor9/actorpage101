@@ -17,35 +17,35 @@ export interface ActorLink {
 
 export interface ActorReel {
   id: string;
-  title?: string | null;
+  title?: string;
   platform: 'vimeo' | 'youtube' | 'other';
-  videoId?: string | null;  // for vimeo/youtube
-  embedUrl?: string | null; // fallback for other
+  videoId?: string;  // for vimeo/youtube
+  embedUrl?: string; // fallback for other
 }
 
 export interface ActorCredit {
   id: string;
   category: 'Film' | 'TV' | 'Theatre' | 'Voiceover' | 'Other';
   project: string;
-  role?: string | null;
-  director?: string | null;
-  year?: number | null;
+  role?: string;
+  director?: string;
+  year?: number;
 }
 
 export interface ActorPhoto {
   id: string;
   url: string;
-  alt?: string | null;
+  alt?: string;
   isPrimary?: boolean;
 }
 
 export interface ActorProfile {
   displayName: string;
-  tagline?: string | null;
-  bio?: string | null;
-  location?: string | null;
-  ageRange?: string | null;
-  unionStatus?: string | null;
+  tagline?: string;
+  bio?: string;
+  location?: string;
+  ageRange?: string;
+  unionStatus?: string;
 }
 
 export interface ActorPageLayoutProps {

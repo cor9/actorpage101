@@ -1,7 +1,8 @@
 import { notFound } from "next/navigation";
 import { createServerSupabaseClient } from "@/lib/supabaseServer";
-import { ActorPageLayout } from "@/components/actor-page/ActorPageLayout";
+import { ActorPageLayout } from "@/components/actor/ActorPageLayout";
 import { ActorPageConfig } from "@/components/actor-page/types";
+import { adaptOldConfigToNew } from "@/lib/configAdapter";
 
 interface PageProps {
   params: Promise<{ slug: string }>;
@@ -41,7 +42,10 @@ export default async function ActorPage({ params }: PageProps) {
   config.tier = data.tier;
   config.templateId = data.template_id;
 
-  return <ActorPageLayout config={config} />;
+  // Convert old config to new unified format
+  const layoutProps = adaptOldConfigToNew(config);
+
+  return <ActorPageLayout {...layoutProps} />;
 }
 
 export async function generateMetadata({ params }: PageProps) {
