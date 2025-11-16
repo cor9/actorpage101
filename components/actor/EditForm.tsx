@@ -39,6 +39,44 @@ export const EditForm: React.FC<Props> = ({ initialData, onSave, isSaving }) => 
     });
   };
 
+  const addPhoto = () => {
+    setFormData({
+      ...formData,
+      photos: [
+        ...formData.photos,
+        {
+          id: `photo-${Date.now()}`,
+          url: '',
+          alt: '',
+          isPrimary: formData.photos.length === 0, // First photo is primary by default
+        },
+      ],
+    });
+  };
+
+  const updatePhoto = (index: number, field: keyof ActorPhoto, value: string | boolean) => {
+    const newPhotos = [...formData.photos];
+    newPhotos[index] = { ...newPhotos[index], [field]: value };
+    setFormData({ ...formData, photos: newPhotos });
+  };
+
+  const setPrimaryPhoto = (index: number) => {
+    const newPhotos = formData.photos.map((photo, idx) => ({
+      ...photo,
+      isPrimary: idx === index,
+    }));
+    setFormData({ ...formData, photos: newPhotos });
+  };
+
+  const removePhoto = (index: number) => {
+    const newPhotos = formData.photos.filter((_, i) => i !== index);
+    // If we removed the primary photo, make the first one primary
+    if (newPhotos.length > 0 && !newPhotos.some(p => p.isPrimary)) {
+      newPhotos[0].isPrimary = true;
+    }
+    setFormData({ ...formData, photos: newPhotos });
+  };
+
   const addReel = () => {
     setFormData({
       ...formData,
@@ -217,6 +255,96 @@ export const EditForm: React.FC<Props> = ({ initialData, onSave, isSaving }) => 
               <option value="classic-light">Classic Light</option>
             </select>
           </div>
+        </div>
+      </div>
+
+      {/* Photos Section */}
+      <div className={sectionClasses}>
+        <div className="flex justify-between items-center mb-4">
+          <h2 className="text-2xl font-bold text-white">Photos & Headshots</h2>
+          <button type="button" onClick={addPhoto} className={buttonClasses}>
+            + Add Photo
+          </button>
+        </div>
+
+        <div className="space-y-4">
+          {formData.photos.map((photo, idx) => (
+            <div key={photo.id} className="border border-neon-cyan/30 rounded-lg p-4">
+              <div className="grid md:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className={labelClasses}>Photo URL</label>
+                  <input
+                    type="url"
+                    value={photo.url}
+                    onChange={(e) => updatePhoto(idx, 'url', e.target.value)}
+                    placeholder="https://..."
+                    className={inputClasses}
+                  />
+                  <p className="text-xs text-gray-400 mt-1">
+                    Upload your photo to a service like Imgur or use a direct image URL
+                  </p>
+                </div>
+
+                <div>
+                  <label className={labelClasses}>Alt Text (optional)</label>
+                  <input
+                    type="text"
+                    value={photo.alt || ''}
+                    onChange={(e) => updatePhoto(idx, 'alt', e.target.value)}
+                    placeholder="Description of photo"
+                    className={inputClasses}
+                  />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between">
+                <div className="flex items-center gap-4">
+                  <button
+                    type="button"
+                    onClick={() => setPrimaryPhoto(idx)}
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-colors ${
+                      photo.isPrimary
+                        ? 'bg-neon-pink text-white'
+                        : 'bg-gray-700 text-gray-300 hover:bg-gray-600'
+                    }`}
+                  >
+                    {photo.isPrimary ? '★ Primary Headshot' : 'Set as Primary'}
+                  </button>
+                  {photo.url && (
+                    <a
+                      href={photo.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-neon-cyan hover:text-neon-pink text-sm"
+                    >
+                      Preview Image →
+                    </a>
+                  )}
+                </div>
+
+                <button
+                  type="button"
+                  onClick={() => removePhoto(idx)}
+                  className="text-sm text-red-400 hover:text-red-300"
+                >
+                  Remove Photo
+                </button>
+              </div>
+            </div>
+          ))}
+
+          {formData.photos.length === 0 && (
+            <p className="text-gray-400 text-sm">No photos added yet. Click "+ Add Photo" to get started.</p>
+          )}
+        </div>
+
+        <div className="mt-4 p-4 bg-dark-purple/30 border border-neon-cyan/20 rounded-lg">
+          <p className="text-sm text-gray-300">
+            <strong>Plan Limits:</strong>{' '}
+            {formData.plan === 'free' && 'Free plan: 3 photos total (1 primary + 2 gallery)'}
+            {formData.plan === 'standard' && 'Standard plan: 6 photos total (1 primary + 5 gallery)'}
+            {formData.plan === 'premium' && 'Premium plan: 11 photos total (1 primary + 10 gallery)'}
+          </p>
         </div>
       </div>
 
