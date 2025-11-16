@@ -47,11 +47,11 @@ export default function MarketingPage() {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
         <div className="mb-16 flex justify-center">
           <Image
-            src="/hero.jpg"
-            alt="Actor Page 101 Hero"
-            width={1200}
-            height={675}
-            className="max-h-[420px] w-auto rounded-2xl shadow-xl"
+            src="/logotransparent.png"
+            alt="Actor Page 101"
+            width={900}
+            height={900}
+            className="max-h-[520px] w-auto rounded-2xl shadow-xl"
             priority
           />
         </div>
