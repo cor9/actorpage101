@@ -474,6 +474,20 @@ export const EditForm: React.FC<Props> = ({ initialData, onSave, isSaving }) => 
           </button>
         </div>
 
+        <div className="mb-4 p-3 bg-dark-purple/30 border border-neon-cyan/20 rounded-lg">
+          <p className="text-xs text-gray-400">
+            <strong className="text-neon-cyan">Role Guidelines:</strong>
+            {' '}
+            <span className="text-gray-300">TV:</span> Series Regular, Recurring, Guest Star, Co-Star
+            {' • '}
+            <span className="text-gray-300">Film:</span> Lead, Supporting
+            {' • '}
+            <span className="text-gray-300">Theatre:</span> Role Name or Ensemble
+            {' • '}
+            <span className="text-gray-300">Commercial:</span> Principal, Featured
+          </p>
+        </div>
+
         <div className="space-y-4">
           {formData.credits.map((credit, idx) => (
             <div key={credit.id} className="border border-neon-cyan/30 rounded-lg p-4">
@@ -523,7 +537,13 @@ export const EditForm: React.FC<Props> = ({ initialData, onSave, isSaving }) => 
                     type="text"
                     value={credit.role || ''}
                     onChange={(e) => updateCredit(idx, 'role', e.target.value)}
-                    placeholder="Lead, Supporting, Guest Star, etc."
+                    placeholder={
+                      credit.category === 'TV' ? 'Series Regular, Recurring, Guest Star, Co-Star' :
+                      credit.category === 'Film' ? 'Lead, Supporting' :
+                      credit.category === 'Theatre' ? 'Role Name or Ensemble' :
+                      credit.category === 'Other' ? 'Principal, Featured' :
+                      'Role'
+                    }
                     className={inputClasses}
                   />
                 </div>

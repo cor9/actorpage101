@@ -63,9 +63,9 @@ const freeDemo: ActorPageLayoutProps = {
     },
     {
       id: 'c4',
-      category: 'TV',
-      project: 'Commercial',
-      role: 'Featured',
+      category: 'Other',
+      project: 'National Commercial',
+      role: 'Principal',
       year: 2022,
     },
     {
