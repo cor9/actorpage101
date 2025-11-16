@@ -11,7 +11,7 @@ export default function MarketingPage() {
           <div className="flex justify-between items-center h-16">
             <div className="flex items-center gap-2">
               <Image
-                src="/actorpage101logo.png"
+                src="/logotransparent.png"
                 alt="Actor Page 101"
                 width={40}
                 height={40}
@@ -45,6 +45,17 @@ export default function MarketingPage() {
       </nav>
 
       <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20">
+        <div className="relative mb-16 overflow-hidden rounded-2xl border border-neon-pink/20" style={{ boxShadow: '0 0 30px rgba(255, 73, 219, 0.15)' }}>
+          <Image
+            src="/hero.jpg"
+            alt="Actor Page 101 Hero"
+            width={1600}
+            height={600}
+            className="w-full h-[280px] md:h-[380px] object-cover opacity-80"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-dark-purple/80 via-deep-purple/30 to-transparent" />
+        </div>
         <div className="text-center">
           <h1 className="text-5xl font-bold text-white mb-6" style={{ textShadow: '0 0 20px rgba(255, 73, 219, 0.5)' }}>
             Your Professional Actor Website

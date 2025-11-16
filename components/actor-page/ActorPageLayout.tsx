@@ -22,7 +22,7 @@ export const ActorPageLayout: React.FC<Props> = ({ config }) => {
   const { tier } = config;
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-900 to-slate-950 text-slate-50">
+    <div className="min-h-screen bg-gradient-to-br from-dark-purple via-deep-purple to-dark-purple text-white">
       <div className="mx-auto max-w-5xl px-4 py-10 space-y-16">
         <HeroSection config={config.hero} tier={tier} />
 

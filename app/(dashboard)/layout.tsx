@@ -10,9 +10,10 @@ export default function DashboardLayout({
       <nav className="bg-dark-purple/80 backdrop-blur-sm border-b border-neon-pink/30" style={{ boxShadow: '0 0 20px rgba(255, 73, 219, 0.1)' }}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between h-16">
-            <div className="flex">
+            <div className="flex items-center gap-2">
               <Link href="/dashboard" className="flex items-center px-2 py-2 text-white font-semibold" style={{ textShadow: '0 0 10px rgba(255, 73, 219, 0.5)' }}>
-                Actor Page 101
+                <img src="/logotransparent.png" alt="Actor Page 101" className="h-8 w-8 rounded" />
+                <span className="ml-2">Actor Page 101</span>
               </Link>
               <div className="hidden sm:ml-6 sm:flex sm:space-x-8">
                 <Link
