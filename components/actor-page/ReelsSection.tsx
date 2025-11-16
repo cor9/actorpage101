@@ -44,6 +44,8 @@ export const ReelsSection: React.FC<Props> = ({ tier, reels }) => {
                 title={reel.title}
                 className="h-full w-full"
                 allow="autoplay; fullscreen; picture-in-picture"
+                allowFullScreen
+                frameBorder="0"
               />
             </div>
           </div>
