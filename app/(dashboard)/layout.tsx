@@ -1,10 +1,30 @@
 import Link from 'next/link';
+import { createServerSupabaseClient } from '@/lib/supabaseServer';
 
-export default function DashboardLayout({
+export default async function DashboardLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const supabase = await createServerSupabaseClient();
+
+  // Check if user is admin
+  let isAdmin = false;
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    if (user) {
+      const { data: profile } = await supabase
+        .from('profiles')
+        .select('role')
+        .eq('id', user.id)
+        .single();
+
+      isAdmin = profile?.role === 'admin';
+    }
+  } catch (error) {
+    console.error('Error checking admin status:', error);
+  }
+
   return (
     <div className="min-h-screen bg-dark-purple">
       <nav className="bg-dark-purple/80 backdrop-blur-sm border-b border-neon-pink/30" style={{ boxShadow: '0 0 20px rgba(255, 73, 219, 0.1)' }}>
@@ -28,6 +48,14 @@ export default function DashboardLayout({
                 >
                   + New Page
                 </Link>
+                {isAdmin && (
+                  <Link
+                    href="/admin"
+                    className="inline-flex items-center px-1 pt-1 text-sm font-medium text-red-400 hover:text-red-300 transition-colors"
+                  >
+                    ⚡ Admin
+                  </Link>
+                )}
               </div>
             </div>
             <div className="flex items-center gap-4">
