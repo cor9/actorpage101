@@ -30,7 +30,7 @@ export const HeroSection: React.FC<Props> = ({ config, tier }) => {
         <img
           src={headshotUrl}
           alt={name}
-          className="h-64 w-48 rounded-2xl object-cover shadow-2xl border border-neon-pink/30"
+          className="max-h-80 w-auto max-w-full rounded-2xl object-contain shadow-2xl border border-neon-pink/30 bg-black/30 p-1"
         />
       </div>
 

@@ -26,7 +26,7 @@ export const BTSSection: React.FC<Props> = ({ tier, bts }) => {
           {albums.map((album) => (
             <span
               key={album.id}
-              className="rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1"
+              className="rounded-full border border-neon-pink/30 bg-dark-purple/70 px-3 py-1 text-neon-cyan"
             >
               {album.label}
             </span>
@@ -40,13 +40,13 @@ export const BTSSection: React.FC<Props> = ({ tier, bts }) => {
             key={img.id}
             src={img.url}
             alt={img.alt || 'BTS'}
-            className="aspect-square w-full rounded-2xl object-cover shadow-md shadow-slate-900/60 border border-slate-700/70"
+            className="aspect-square w-full rounded-2xl object-cover shadow-md border border-neon-pink/30"
           />
         ))}
       </div>
 
       {tier === 'standard' && (
-        <p className="text-[11px] text-slate-400">
+        <p className="text-[11px] text-gray-400">
           Upgrade to Premium for unlimited BTS albums and images.
         </p>
       )}

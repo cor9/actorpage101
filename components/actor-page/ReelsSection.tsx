@@ -27,19 +27,19 @@ export const ReelsSection: React.FC<Props> = ({ tier, reels }) => {
         {visible.map((reel) => (
           <div
             key={reel.id}
-            className="rounded-2xl bg-slate-950/70 p-3 shadow-lg shadow-slate-900/80 border border-slate-800"
+            className="rounded-2xl bg-dark-purple/70 p-3 shadow-lg border border-neon-pink/30"
           >
             {reel.title && (
-              <p className="mb-2 text-xs font-semibold text-slate-200">
+              <p className="mb-2 text-xs font-semibold text-white">
                 {reel.title}
                 {reel.projectLabel && (
-                  <span className="ml-1 text-[11px] text-indigo-300">
+                  <span className="ml-1 text-[11px] text-neon-cyan">
                     • {reel.projectLabel}
                   </span>
                 )}
               </p>
             )}
-            <div className="aspect-video overflow-hidden rounded-xl border border-slate-800/80 bg-black">
+            <div className="aspect-video overflow-hidden rounded-xl border border-neon-pink/20 bg-black">
               <iframe
                 src={normalizeVimeoEmbed(reel.vimeoUrl)}
                 title={reel.title}
@@ -52,12 +52,12 @@ export const ReelsSection: React.FC<Props> = ({ tier, reels }) => {
       </div>
 
       {tier === 'free' && (
-        <p className="text-[11px] text-slate-400">
+        <p className="text-[11px] text-gray-400">
           Free plan includes one reel. Add more clips with Standard or Premium.
         </p>
       )}
       {tier === 'standard' && (
-        <p className="text-[11px] text-slate-400">
+        <p className="text-[11px] text-gray-400">
           Unlimited clips and project categories are available with Premium.
         </p>
       )}
