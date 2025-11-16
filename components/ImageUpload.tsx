@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useId } from 'react';
 import { createBrowserSupabaseClient } from '@/lib/supabaseBrowser';
 
 type Props = {
@@ -13,6 +13,7 @@ type Props = {
 export function ImageUpload({ currentUrl, onUploadComplete, label = 'Upload Image', accept = 'image/*' }: Props) {
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState<string | null>(null);
+  const uniqueId = useId();
 
   const handleFileChange = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
@@ -83,14 +84,14 @@ export function ImageUpload({ currentUrl, onUploadComplete, label = 'Upload Imag
 
       <div className="flex items-center gap-3">
         <label
-          htmlFor="file-upload"
+          htmlFor={uniqueId}
           className="cursor-pointer px-4 py-2 bg-gradient-to-r from-neon-pink to-neon-cyan text-white text-sm rounded-lg font-medium transition-all hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed"
           style={{ boxShadow: '0 0 15px rgba(255, 73, 219, 0.4)' }}
         >
           {uploading ? 'Uploading...' : currentUrl ? 'Change Image' : 'Choose File'}
         </label>
         <input
-          id="file-upload"
+          id={uniqueId}
           type="file"
           accept={accept}
           onChange={handleFileChange}
