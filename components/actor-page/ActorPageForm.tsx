@@ -1,7 +1,7 @@
 // components/actor-page/ActorPageForm.tsx
 'use client';
 
-import React, { useState } from 'react';
+import React, { useState, useCallback, memo } from 'react';
 import {
   ActorPageConfig,
   Tier,
@@ -93,7 +93,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
   const [isSaving, setIsSaving] = useState(false);
   const [message, setMessage] = useState<string | null>(null);
 
-  const updateHero = <K extends keyof ActorPageConfig['hero']>(
+  const updateHero = useCallback(<K extends keyof ActorPageConfig['hero']>(
     key: K,
     value: ActorPageConfig['hero'][K]
   ) => {
@@ -104,9 +104,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         [key]: value,
       },
     }));
-  };
+  }, []);
 
-  const updateResume = <K extends keyof ActorPageConfig['resume']>(
+  const updateResume = useCallback(<K extends keyof ActorPageConfig['resume']>(
     key: K,
     value: ActorPageConfig['resume'][K]
   ) => {
@@ -117,9 +117,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         [key]: value,
       },
     }));
-  };
+  }, []);
 
-  const updateContact = <K extends keyof ActorPageConfig['contact']>(
+  const updateContact = useCallback(<K extends keyof ActorPageConfig['contact']>(
     key: K,
     value: ActorPageConfig['contact'][K]
   ) => {
@@ -130,9 +130,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         [key]: value,
       },
     }));
-  };
+  }, []);
 
-  const updateTheme = <K extends keyof ThemeConfig>(
+  const updateTheme = useCallback(<K extends keyof ThemeConfig>(
     key: K,
     value: ThemeConfig[K]
   ) => {
@@ -143,9 +143,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         [key]: value,
       },
     }));
-  };
+  }, []);
 
-  const toggleExtra = (extra: ThemeConfig['extrasEnabled'][number]) => {
+  const toggleExtra = useCallback((extra: ThemeConfig['extrasEnabled'][number]) => {
     setConfig((prev) => {
       const current = prev.theme?.extrasEnabled || [];
       const exists = current.includes(extra);
@@ -160,14 +160,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         },
       };
     });
-  };
+  }, []);
 
-  const handleTierChange = (tier: Tier) => {
-    setConfig((prev) => ({
-      ...prev,
-      tier,
-    }));
-
+  const handleTierChange = useCallback((tier: Tier) => {
     setConfig((prev) => {
       let resume = { ...prev.resume };
       if (tier === 'free') {
@@ -181,11 +176,11 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
           resume.mode = 'pdf_embed';
         }
       }
-      return { ...prev, resume };
+      return { ...prev, tier, resume };
     });
-  };
+  }, []);
 
-  const handleAddHeadshot = () => {
+  const handleAddHeadshot = useCallback(() => {
     setConfig((prev) => {
       const galleries = [...prev.headshots.galleries];
       if (galleries.length === 0) {
@@ -210,9 +205,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         headshots: { galleries },
       };
     });
-  };
+  }, []);
 
-  const handleHeadshotChange = (
+  const handleHeadshotChange = useCallback((
     index: number,
     field: 'url' | 'alt',
     value: string
@@ -230,9 +225,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
       galleries[0] = { ...main, images };
       return { ...prev, headshots: { galleries } };
     });
-  };
+  }, []);
 
-  const handleRemoveHeadshot = (index: number) => {
+  const handleRemoveHeadshot = useCallback((index: number) => {
     setConfig((prev) => {
       const galleries = [...prev.headshots.galleries];
       if (galleries.length === 0) return prev;
@@ -241,9 +236,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
       galleries[0] = { ...main, images };
       return { ...prev, headshots: { galleries } };
     });
-  };
+  }, []);
 
-  const handleAddReel = () => {
+  const handleAddReel = useCallback(() => {
     setConfig((prev) => {
       const newId = `reel-${Date.now()}-${Math.random().toString(16).slice(2)}`;
       return {
@@ -261,9 +256,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         },
       };
     });
-  };
+  }, []);
 
-  const handleReelChange = (
+  const handleReelChange = useCallback((
     index: number,
     field: 'title' | 'vimeoUrl' | 'projectLabel',
     value: string
@@ -274,16 +269,16 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
       items[index] = { ...items[index], [field]: value };
       return { ...prev, reels: { items } };
     });
-  };
+  }, []);
 
-  const handleRemoveReel = (index: number) => {
+  const handleRemoveReel = useCallback((index: number) => {
     setConfig((prev) => {
       const items = prev.reels.items.filter((_, i) => i !== index);
       return { ...prev, reels: { items } };
     });
-  };
+  }, []);
 
-  const handleSocialChange = (
+  const handleSocialChange = useCallback((
     index: number,
     field: 'platform' | 'url' | 'label' | 'iconName',
     value: string
@@ -312,9 +307,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         },
       };
     });
-  };
+  }, []);
 
-  const handleAddSocial = () => {
+  const handleAddSocial = useCallback(() => {
     setConfig((prev) => ({
       ...prev,
       hero: {
@@ -328,9 +323,9 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         ],
       },
     }));
-  };
+  }, []);
 
-  const handleRemoveSocial = (index: number) => {
+  const handleRemoveSocial = useCallback((index: number) => {
     setConfig((prev) => ({
       ...prev,
       hero: {
@@ -338,7 +333,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         socialLinks: prev.hero.socialLinks.filter((_, i) => i !== index),
       },
     }));
-  };
+  }, []);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
