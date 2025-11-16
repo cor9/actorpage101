@@ -19,29 +19,14 @@ export function getVimeoConfig(): VimeoConfig {
   };
 }
 
-/**
- * Upload a video to Vimeo
- * @param file - The video file to upload
- * @param title - Video title
- * @param description - Video description
- */
-export async function uploadToVimeo(
-  file: File,
-  title: string,
-  description?: string
-): Promise<string> {
-  const config = getVimeoConfig();
-
-  // Implementation will use Vimeo API to upload videos
-  // This is a placeholder for now
-  throw new Error('Vimeo upload not yet implemented');
-}
+// Note: We currently embed user-provided Vimeo links only. No upload API is used.
 
 /**
  * Get Vimeo embed URL from video ID
+ * Includes query parameters for better embedding
  */
 export function getVimeoEmbedUrl(vimeoId: string): string {
-  return `https://player.vimeo.com/video/${vimeoId}`;
+  return `https://player.vimeo.com/video/${vimeoId}?badge=0&autopause=0&player_id=0&app_id=58479`;
 }
 
 /**
@@ -59,4 +44,41 @@ export function extractVimeoId(url: string): string | null {
   }
 
   return null;
+}
+
+/**
+ * Normalize any Vimeo URL or ID into an embeddable URL.
+ * If input is already an embed URL, ensures proper query parameters.
+ */
+export function normalizeVimeoEmbed(input: string): string {
+  if (!input) return '';
+
+  // If already an embed URL, preserve it but ensure it has the base params
+  if (/^https?:\/\/player\.vimeo\.com\/video\/\d+/.test(input)) {
+    const id = extractVimeoId(input);
+    if (id) {
+      // Extract existing query params and merge with defaults
+      const url = new URL(input);
+      if (!url.searchParams.has('badge')) url.searchParams.set('badge', '0');
+      if (!url.searchParams.has('autopause')) url.searchParams.set('autopause', '0');
+      if (!url.searchParams.has('player_id')) url.searchParams.set('player_id', '0');
+      if (!url.searchParams.has('app_id')) url.searchParams.set('app_id', '58479');
+      return url.toString();
+    }
+    return input;
+  }
+
+  // If it's a plain vimeo URL, extract and convert
+  const id = extractVimeoId(input);
+  if (id) {
+    return getVimeoEmbedUrl(id);
+  }
+
+  // If it looks like a numeric ID, treat as ID
+  if (/^\d+$/.test(input.trim())) {
+    return getVimeoEmbedUrl(input.trim());
+  }
+
+  // Fallback: return original (consumer can decide to reject/validate)
+  return input;
 }

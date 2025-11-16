@@ -1,5 +1,6 @@
 import React from 'react';
 import { ActorPageConfig } from './types';
+import { generateColorCSS, generateTypographyCSS, getColorPreset, getTypographyPreset } from '@/lib/templates';
 import { HeroSection } from './HeroSection';
 import { SectionDivider } from './SectionDivider';
 import { HeadshotsSection } from './HeadshotsSection';
@@ -20,9 +21,25 @@ interface Props {
 
 export const ActorPageLayout: React.FC<Props> = ({ config }) => {
   const { tier } = config;
+  // Resolve theme (basic customization via presets or inline values)
+  const colorVars = getColorPreset('default');
+  const typeVars = getTypographyPreset('modern');
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-indigo-900 to-slate-950 text-slate-50">
+    <div
+      className="min-h-screen text-white"
+      style={
+        {
+          ...(colorVars ? ({} as any) : {}),
+          // Apply CSS variables
+          cssText: `${colorVars ? generateColorCSS(colorVars) : ''};${typeVars ? generateTypographyCSS(typeVars) : ''}`,
+          background:
+            'linear-gradient(180deg, var(--color-background) 0%, rgba(0,0,0,0.02) 100%)',
+          color: 'var(--color-text)',
+          fontFamily: 'var(--font-body)',
+        } as any
+      }
+    >
       <div className="mx-auto max-w-5xl px-4 py-10 space-y-16">
         <HeroSection config={config.hero} tier={tier} />
 

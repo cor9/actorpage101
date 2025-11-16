@@ -28,7 +28,7 @@ export const HeadshotsSection: React.FC<Props> = ({ tier, headshots }) => {
           {galleries.map((g) => (
             <span
               key={g.id}
-              className="rounded-full border border-slate-700 bg-slate-900/60 px-3 py-1"
+              className="rounded-full border border-neon-pink/30 bg-dark-purple/70 px-3 py-1 text-neon-cyan"
             >
               {g.label}
             </span>
@@ -42,18 +42,18 @@ export const HeadshotsSection: React.FC<Props> = ({ tier, headshots }) => {
             key={img.id}
             src={img.url}
             alt={img.alt || ''}
-            className="aspect-[3/4] w-full rounded-2xl object-cover shadow-md shadow-slate-900/60 border border-slate-700/70"
+            className="aspect-[3/4] w-full rounded-2xl object-cover shadow-md border border-neon-pink/30"
           />
         ))}
       </div>
 
       {tier === 'free' && (
-        <p className="text-[11px] text-slate-400">
+        <p className="text-[11px] text-gray-400">
           Add unlimited headshots with a Standard or Premium plan.
         </p>
       )}
       {tier === 'standard' && (
-        <p className="text-[11px] text-slate-400">
+        <p className="text-[11px] text-gray-400">
           Multiple galleries and full portfolios are available with Premium.
         </p>
       )}

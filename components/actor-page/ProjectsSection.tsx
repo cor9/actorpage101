@@ -16,31 +16,31 @@ export const ProjectsSection: React.FC<Props> = ({ projects }) => {
         {items.map((project) => (
           <div
             key={project.id}
-            className="rounded-2xl bg-slate-950/70 p-4 shadow-lg shadow-slate-900/80 border border-slate-800 flex gap-4"
+            className="rounded-2xl bg-dark-purple/70 p-4 shadow-lg border border-neon-pink/30 flex gap-4"
           >
             {project.posterUrl && (
               <img
                 src={project.posterUrl}
                 alt={project.title}
-                className="h-32 w-24 rounded-xl object-cover border border-slate-700/70"
+                className="h-32 w-24 rounded-xl object-cover border border-neon-pink/30"
               />
             )}
             <div className="flex-1 space-y-1">
-              <h3 className="text-base font-semibold text-slate-100">
+              <h3 className="text-base font-semibold text-white">
                 {project.title}
               </h3>
-              <p className="text-sm text-indigo-300">{project.role}</p>
-              <p className="text-xs text-slate-400 capitalize">
+              <p className="text-sm text-neon-cyan">{project.role}</p>
+              <p className="text-xs text-gray-300 capitalize">
                 {project.medium}
                 {project.year && ` • ${project.year}`}
               </p>
               {project.platformOrCompany && (
-                <p className="text-xs text-slate-400">
+                <p className="text-xs text-gray-300">
                   {project.platformOrCompany}
                 </p>
               )}
               {project.description && (
-                <p className="text-xs text-slate-300 mt-2">
+                <p className="text-xs text-gray-200 mt-2">
                   {project.description}
                 </p>
               )}
