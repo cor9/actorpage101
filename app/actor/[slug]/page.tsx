@@ -4,7 +4,7 @@ import { ActorPageLayout } from "@/components/actor-page/ActorPageLayout";
 import { ActorPageConfig } from "@/components/actor-page/types";
 
 interface PageProps {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }
 
 export const revalidate = 3600; // Revalidate every hour
@@ -27,7 +27,7 @@ async function getActorPage(slug: string) {
 }
 
 export default async function ActorPage({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const data = await getActorPage(slug);
 
   if (!data) {
@@ -45,7 +45,7 @@ export default async function ActorPage({ params }: PageProps) {
 }
 
 export async function generateMetadata({ params }: PageProps) {
-  const { slug } = params;
+  const { slug } = await params;
   const data = await getActorPage(slug);
 
   if (!data) {
