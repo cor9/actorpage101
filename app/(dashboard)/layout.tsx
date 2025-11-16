@@ -20,31 +20,13 @@ export default function DashboardLayout({
                   href="/dashboard"
                   className="inline-flex items-center px-1 pt-1 text-sm font-medium text-white border-b-2 border-neon-pink"
                 >
-                  Dashboard
+                  My Pages
                 </Link>
                 <Link
-                  href="/dashboard/site"
+                  href="/dashboard/pages/new"
                   className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-300 hover:text-neon-cyan transition-colors"
                 >
-                  Site
-                </Link>
-                <Link
-                  href="/dashboard/bio"
-                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-300 hover:text-neon-cyan transition-colors"
-                >
-                  Bio
-                </Link>
-                <Link
-                  href="/dashboard/media"
-                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-300 hover:text-neon-cyan transition-colors"
-                >
-                  Media
-                </Link>
-                <Link
-                  href="/dashboard/credits"
-                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-300 hover:text-neon-cyan transition-colors"
-                >
-                  Credits
+                  + New Page
                 </Link>
               </div>
             </div>
