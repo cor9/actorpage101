@@ -48,6 +48,12 @@ export default async function DashboardLayout({
                 >
                   + New Page
                 </Link>
+                <Link
+                  href="/templates"
+                  className="inline-flex items-center px-1 pt-1 text-sm font-medium text-gray-300 hover:text-neon-cyan transition-colors"
+                >
+                  🎨 Templates
+                </Link>
                 {isAdmin && (
                   <Link
                     href="/admin"
