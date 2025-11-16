@@ -90,7 +90,7 @@ const standardDemo: ActorPageLayoutProps = {
     },
     {
       id: 'c3',
-      category: 'Commercial',
+      category: 'Other',
       project: 'Target Holiday Campaign',
       role: 'Principal',
       year: 2023,
@@ -121,7 +121,7 @@ const standardDemo: ActorPageLayoutProps = {
     },
     {
       id: 'c7',
-      category: 'Commercial',
+      category: 'Other',
       project: 'Apple Back to School',
       role: 'Featured',
       year: 2022,
