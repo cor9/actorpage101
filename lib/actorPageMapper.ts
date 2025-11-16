@@ -89,11 +89,11 @@ export function mapDbToActorPageLayout(
   // Map profile
   const profile: ActorProfile = {
     displayName: profileRow.display_name,
-    tagline: profileRow.tagline,
-    bio: profileRow.bio,
-    location: profileRow.location,
-    ageRange: profileRow.age_range,
-    unionStatus: profileRow.union_status,
+    tagline: profileRow.tagline || undefined,
+    bio: profileRow.bio || undefined,
+    location: profileRow.location || undefined,
+    ageRange: profileRow.age_range || undefined,
+    unionStatus: profileRow.union_status || undefined,
   };
 
   // Map photos (sorted by sort_order)
@@ -102,7 +102,7 @@ export function mapDbToActorPageLayout(
     .map(p => ({
       id: p.id,
       url: p.url,
-      alt: p.alt,
+      alt: p.alt || undefined,
       isPrimary: p.is_primary,
     }));
 
@@ -118,10 +118,10 @@ export function mapDbToActorPageLayout(
     .sort((a, b) => a.sort_order - b.sort_order)
     .map(r => ({
       id: r.id,
-      title: r.title,
+      title: r.title || undefined,
       platform: r.platform,
-      videoId: r.video_id,
-      embedUrl: r.embed_url,
+      videoId: r.video_id || undefined,
+      embedUrl: r.embed_url || undefined,
     }));
 
   // Note: Reel limits are enforced in ReelsSection component
@@ -134,9 +134,9 @@ export function mapDbToActorPageLayout(
       id: c.id,
       category: c.category,
       project: c.project,
-      role: c.role,
-      director: c.director,
-      year: c.year,
+      role: c.role || undefined,
+      director: c.director || undefined,
+      year: c.year || undefined,
     }));
 
   // Note: Credit limits are enforced in CreditsSection component
