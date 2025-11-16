@@ -240,7 +240,7 @@ export function adaptNewConfigToOld(
         images: galleryPhotos.map(p => ({
           id: p.id,
           url: p.url,
-          alt: p.alt,
+          alt: p.alt || undefined,
         })),
       }] : [],
     },
