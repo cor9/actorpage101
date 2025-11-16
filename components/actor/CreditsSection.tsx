@@ -151,15 +151,6 @@ const CreditTable: React.FC<{
           </tbody>
         </table>
       </div>
-
-      {/* Mobile view: show category as badge */}
-      <style jsx>{`
-        @media (max-width: 768px) {
-          td:nth-child(3) {
-            display: none;
-          }
-        }
-      `}</style>
     </div>
   );
 };
