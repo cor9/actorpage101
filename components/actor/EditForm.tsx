@@ -1,6 +1,7 @@
 'use client';
 
 import React, { useState } from 'react';
+import { createBrowserSupabaseClient } from '@/lib/supabaseBrowser';
 import type {
   Plan,
   ActorProfile,
@@ -28,6 +29,8 @@ interface Props {
 
 export const EditForm: React.FC<Props> = ({ initialData, onSave, isSaving }) => {
   const [formData, setFormData] = useState<EditFormData>(initialData);
+  const [uploadingPhotos, setUploadingPhotos] = useState<Record<number, boolean>>({});
+  const supabase = createBrowserSupabaseClient();
 
   const updateProfile = (field: keyof ActorProfile, value: string) => {
     setFormData({
@@ -75,6 +78,52 @@ export const EditForm: React.FC<Props> = ({ initialData, onSave, isSaving }) => 
       newPhotos[0].isPrimary = true;
     }
     setFormData({ ...formData, photos: newPhotos });
+  };
+
+  const handlePhotoUpload = async (index: number, file: File) => {
+    try {
+      // Validate file type
+      const validTypes = ['image/jpeg', 'image/jpg', 'image/png', 'image/webp', 'image/heic'];
+      if (!validTypes.includes(file.type)) {
+        alert('Please upload a valid image file (JPEG, PNG, WebP, or HEIC)');
+        return;
+      }
+
+      // Validate file size (max 10MB)
+      const maxSize = 10 * 1024 * 1024; // 10MB in bytes
+      if (file.size > maxSize) {
+        alert('File size must be less than 10MB. Please compress your image or choose a smaller file.');
+        return;
+      }
+
+      setUploadingPhotos({ ...uploadingPhotos, [index]: true });
+
+      // Generate unique file name
+      const fileExt = file.name.split('.').pop();
+      const fileName = `${Math.random().toString(36).substring(2)}-${Date.now()}.${fileExt}`;
+      const filePath = `actor-photos/${fileName}`;
+
+      // Upload to Supabase Storage
+      const { error: uploadError } = await supabase.storage
+        .from('photos')
+        .upload(filePath, file);
+
+      if (uploadError) throw uploadError;
+
+      // Get public URL
+      const { data: { publicUrl } } = supabase.storage
+        .from('photos')
+        .getPublicUrl(filePath);
+
+      // Update photo URL in form data
+      updatePhoto(index, 'url', publicUrl);
+
+      setUploadingPhotos({ ...uploadingPhotos, [index]: false });
+    } catch (error) {
+      console.error('Error uploading photo:', error);
+      alert('Failed to upload photo. Please try again.');
+      setUploadingPhotos({ ...uploadingPhotos, [index]: false });
+    }
   };
 
   const addReel = () => {
@@ -270,20 +319,32 @@ export const EditForm: React.FC<Props> = ({ initialData, onSave, isSaving }) => 
         <div className="space-y-4">
           {formData.photos.map((photo, idx) => (
             <div key={photo.id} className="border border-neon-cyan/30 rounded-lg p-4">
-              <div className="grid md:grid-cols-2 gap-4 mb-4">
+              <div className="space-y-4 mb-4">
                 <div>
-                  <label className={labelClasses}>Photo URL</label>
+                  <label className={labelClasses}>Upload Photo</label>
                   <input
-                    type="url"
-                    value={photo.url}
-                    onChange={(e) => updatePhoto(idx, 'url', e.target.value)}
-                    placeholder="https://..."
-                    className={inputClasses}
+                    type="file"
+                    accept="image/*"
+                    onChange={(e) => {
+                      const file = e.target.files?.[0];
+                      if (file) handlePhotoUpload(idx, file);
+                    }}
+                    disabled={uploadingPhotos[idx]}
+                    className="block w-full text-sm text-gray-300 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-neon-pink file:text-white hover:file:bg-neon-pink/80 file:cursor-pointer disabled:opacity-50"
                   />
-                  <p className="text-xs text-gray-400 mt-1">
-                    Upload your photo to a service like Imgur or use a direct image URL
-                  </p>
+                  {uploadingPhotos[idx] && (
+                    <p className="text-xs text-neon-cyan mt-2">Uploading...</p>
+                  )}
+                  {photo.url && !uploadingPhotos[idx] && (
+                    <p className="text-xs text-green-400 mt-2">✓ Photo uploaded successfully</p>
+                  )}
                 </div>
+
+                {photo.url && (
+                  <div className="border border-neon-cyan/20 rounded-lg p-2 bg-black/30">
+                    <img src={photo.url} alt={photo.alt || 'Preview'} className="w-32 h-32 object-cover rounded" />
+                  </div>
+                )}
 
                 <div>
                   <label className={labelClasses}>Alt Text (optional)</label>
