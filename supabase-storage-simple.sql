@@ -1,40 +1,36 @@
--- Supabase Storage Setup for Actor Photos
--- Run this in your Supabase SQL Editor
+-- Simpler Storage Setup (More Permissive)
+-- Use this if the other setup doesn't work
 
 -- Create the photos bucket if it doesn't exist
 INSERT INTO storage.buckets (id, name, public)
 VALUES ('photos', 'photos', true)
 ON CONFLICT (id) DO NOTHING;
 
--- Drop existing policies if they exist (to avoid conflicts)
+-- Drop existing policies
 DROP POLICY IF EXISTS "Authenticated users can upload photos" ON storage.objects;
 DROP POLICY IF EXISTS "Public can view photos" ON storage.objects;
 DROP POLICY IF EXISTS "Users can update their own photos" ON storage.objects;
 DROP POLICY IF EXISTS "Users can delete their own photos" ON storage.objects;
 
--- Allow authenticated users to upload photos
+-- Simple policy: Allow authenticated users to upload ANY file to photos bucket
 CREATE POLICY "Authenticated users can upload photos"
 ON storage.objects FOR INSERT
 TO authenticated
-WITH CHECK (
-  bucket_id = 'photos' AND
-  (storage.foldername(name))[1] = 'actor-photos'
-);
+WITH CHECK (bucket_id = 'photos');
 
--- Allow public read access to photos
+-- Allow public read access
 CREATE POLICY "Public can view photos"
 ON storage.objects FOR SELECT
 TO public
 USING (bucket_id = 'photos');
 
--- Allow users to update their own photos
+-- Allow authenticated users to update in photos bucket
 CREATE POLICY "Users can update their own photos"
 ON storage.objects FOR UPDATE
 TO authenticated
-USING (bucket_id = 'photos')
-WITH CHECK (bucket_id = 'photos');
+USING (bucket_id = 'photos');
 
--- Allow users to delete their own photos
+-- Allow authenticated users to delete from photos bucket
 CREATE POLICY "Users can delete their own photos"
 ON storage.objects FOR DELETE
 TO authenticated
