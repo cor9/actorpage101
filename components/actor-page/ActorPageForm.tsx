@@ -2,6 +2,8 @@
 'use client';
 
 import React, { useState, useCallback, memo } from 'react';
+import { DndProvider } from 'react-dnd';
+import { HTML5Backend } from 'react-dnd-html5-backend';
 import {
   ActorPageConfig,
   Tier,
@@ -11,8 +13,11 @@ import {
   ThemeId,
   FontPreset,
   IconStyle,
+  SectionKey,
+  DEFAULT_SECTION_ORDER,
 } from './types';
 import { ImageUpload } from '../ImageUpload';
+import SectionReorderList from './SectionReorderList';
 
 type Props = {
   initialConfig: ActorPageConfig;
@@ -160,6 +165,13 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
         },
       };
     });
+  }, []);
+
+  const updateSectionOrder = useCallback((newOrder: SectionKey[]) => {
+    setConfig((prev) => ({
+      ...prev,
+      section_order: newOrder,
+    }));
   }, []);
 
   const handleTierChange = useCallback((tier: Tier) => {
@@ -355,10 +367,11 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
   const extras = theme.extrasEnabled || [];
 
   return (
-    <form
-      onSubmit={handleSubmit}
-      className="space-y-10 rounded-3xl bg-dark-purple/70 p-6 md:p-8 border border-neon-pink/20 shadow-2xl shadow-neon-pink/30"
-    >
+    <DndProvider backend={HTML5Backend}>
+      <form
+        onSubmit={handleSubmit}
+        className="space-y-10 rounded-3xl bg-dark-purple/70 p-6 md:p-8 border border-neon-pink/20 shadow-2xl shadow-neon-pink/30"
+      >
       <div className="flex flex-wrap items-center justify-between gap-4">
         <div>
           <h1 className="text-xl md:text-2xl font-semibold">Actor Page Builder</h1>
@@ -539,6 +552,15 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
             </div>
           </div>
         )}
+
+        {/* Section Reordering */}
+        <div className="pt-6 mt-6 border-t border-slate-700/50">
+          <SectionReorderList
+            sectionOrder={config.section_order || DEFAULT_SECTION_ORDER}
+            tier={config.tier}
+            onChange={updateSectionOrder}
+          />
+        </div>
       </section>
 
       {/* HERO */}
@@ -996,6 +1018,7 @@ export const ActorPageForm: React.FC<Props> = ({ initialConfig, onSubmit }) => {
           {message}
         </p>
       )}
-    </form>
+      </form>
+    </DndProvider>
   );
 };

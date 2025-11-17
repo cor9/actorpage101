@@ -116,6 +116,27 @@ export interface ContactConfig {
   showReps: boolean;
 }
 
+// Section keys for drag-and-drop reordering
+export type SectionKey =
+  | 'hero'
+  | 'headshots'
+  | 'reels'
+  | 'bts'
+  | 'projects'
+  | 'resume'
+  | 'contact';
+
+// Default section order (used as fallback and for reordering)
+export const DEFAULT_SECTION_ORDER: SectionKey[] = [
+  'hero',
+  'headshots',
+  'reels',
+  'bts',
+  'projects',
+  'resume',
+  'contact',
+];
+
 export interface ActorPageConfig {
   tier: Tier;
   templateId: TemplateId;
@@ -135,4 +156,5 @@ export interface ActorPageConfig {
   };
   resume: ResumeConfig;
   contact: ContactConfig;
+  section_order?: SectionKey[]; // Optional: Custom section ordering (Standard/Premium feature)
 }
